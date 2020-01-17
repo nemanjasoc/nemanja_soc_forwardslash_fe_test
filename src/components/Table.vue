@@ -209,7 +209,7 @@
 <style lang="scss">
 .rectangle {
     width: 100%;
-    height: 100px;
+    height: 166px;
     background-color: #f5f2ee;
     display: flex;
     justify-content: center;
@@ -226,17 +226,19 @@
 
 .fa-search {
     position: absolute;
-    left: calc(10% + 12px);
-    top: 8px;
+    left: calc(10% + 16px);
+    top: 12px;
     color: #a9836b;
+    font-size: 18px;
 }
 
 .input-field {  
-    line-height: 30px;
+    line-height: 40px;
     width: 100%;
-    padding-left: 35px;
+    padding-left: 44px;
     border: 1px solid #ddccb8;
     margin: 0 10% 0 10%;
+    font-size: 16px;
 }
 
 ::placeholder {
@@ -257,15 +259,16 @@
     justify-content: space-between;
     flex-wrap: wrap;
     width: 80%;
-    margin-top: 12px;
+    margin-top: 18px;
 }
 
 select {
     width: 15%;
-    height: 30px;
+    height: 41px;
     color: #b4947f;
     border: 1px solid #ddccb8;
     padding-left: 6px;
+    font-size: 16px;
 }
 
 .table-wrapper {
@@ -306,19 +309,19 @@ th {
 
 .brand-collection {
     color: #af8b75;
-    font-weight: 600;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 16px;
 }
 
 .item-no {
     color: #3d4d6c;
-    font-weight: 600;
-    font-size: 15px;
+    font-weight: 500;
+    font-size: 14px;
 }
 
 .table-price {
     color: #a9836b;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 15px;
 }
 
@@ -333,7 +336,7 @@ th {
         font-family: FontAwesome;
         content: "\f078";
         position: absolute;
-        left: 15px;
+        left: 20px;
         top: 11px;
         font-size: 12px;
     }
@@ -342,8 +345,8 @@ th {
         font-family: FontAwesome;
         content: "\f077";
         position: absolute;
-        left: 15px;
-        top: -8px;
+        left: 20px;
+        top: -6px;
         font-size: 12px;
     }
 }
@@ -356,8 +359,8 @@ th {
 
 .stock-title {
     color: #d47517;
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 500;
     padding-left: 4px;
 }
 
@@ -367,21 +370,23 @@ th {
 
 .add-button {
     position: relative;
-    height: 40px;
-    width: 110px;
+    height: 50px;
+    width: 134px;
     outline: none;
     border: none;
     background-color: #2f4061;
     color: #ffffff;
     padding-right: 32px;
-    font-weight: 600;
+    font-weight: 500;
     margin-left: 5px;
+    font-size: 16px;
+    letter-spacing: 4px;
 
     &:after {
         font-family: FontAwesome;
         content: "\f07a";
         position: absolute;
-        right: 30px;
+        right: 26px;
     }
 }
 
@@ -390,8 +395,13 @@ th {
     outline: none;
     border: none;
     color: #2f4061;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
+
+    img {
+        margin-right: 4px;
+        margin-top: 3px;
+    }
 }
 
 .fa-chevron-down {
@@ -400,6 +410,15 @@ th {
 }
 
 @media only screen and (max-width: 992px) {
+    .select-wrapper {
+        margin-top: 8px;
+    }
+
+    select {
+        width: 30%;
+        margin-bottom: 6px;
+    }
+
     th, td {
         padding: 3px;
     }
@@ -462,7 +481,7 @@ th {
         font-size: 12px;
 
         &:after {
-            right: 22px;
+            right: 16px;
         }
     }
 
@@ -481,6 +500,16 @@ th {
 }
 
 @media only screen and (max-width: 768px) {
+    table {
+        margin: 2% 8% 0 8%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    table {
+        margin: 2% 6% 0 6%;
+    }
+
     th, td {
         padding: 1px;
     }
@@ -542,10 +571,11 @@ th {
         height: 26px;
         width: 72px;
         font-size: 10px;
+        margin-left: 10px;
 
         &:after {
             font-size: 10px;
-            right: 20px;
+            right: 12px;
         }
     }
 
@@ -563,84 +593,26 @@ th {
     }
 }
 
-@media only screen and (max-width: 600px) {
-    .fa-star-o {
+@media only screen and (max-width: 480px) {
+    table {
+        margin: 2% 4% 0 4%;
+    }
+
+    .input-field {
+        font-size: 12px;
+        height: 32px;
+    }
+
+    select {
+        height: 32px;
         font-size: 12px;
     }
 
-    td {
-        img {
-            width: 30px;
-            height: 57px;
-        }
+    .fa-search {
+        font-size: 14px;
+        top: 10px;
     }
 
-    th {
-        font-size: 11px;
-    }
-
-    .brand-name {
-        font-size: 11px;
-    }
-
-    .brand-collection {
-        font-size: 11px;
-    }
-
-    .item-no {
-        font-size: 10px;
-    }
-
-    .table-price {
-        font-size: 10px;
-    }
-
-    .caret-number {
-        margin-right: 10px;
-        font-size: 10px;
-
-        &:before {
-            font-size: 7px;
-        }
-
-        &:after {
-            font-size: 7px;
-        }
-    }
-
-    .stock-title {
-        font-size: 6px;
-    }
-
-    .fa-info-circle {
-        font-size: 10px;
-    }
-
-    .add-button {
-        height: 20px;
-        width: 55px;
-        font-size: 10px;
-
-        &:after {
-            font-size: 8px;
-            top: 6px;
-            right: 12px;
-        }
-    }
-
-    .out-stock-button {
-        img {
-            width: 11px;
-            height: 11px;
-        }
-    }
-
-    .fa-chevron-down {
-        font-size: 8px;
-    }
-}
-
-@media only screen and (max-width: 480px) {
     .fa-star-o {
         font-size: 10px;
     }

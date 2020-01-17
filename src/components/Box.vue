@@ -5,7 +5,7 @@
             <div class="empty-box-runner">
                 <div class="empty-box-runner-inner">
                     <div class="inner-content">
-                        <h2>Lorem Ipsum</h2>
+                        <h1>Lorem Ipsum</h1>
                         <p>Vistatech achieves 20-year milestone as market leader for casio calculators, 
                         electronic organizers, musical instruments, audio equipment, digital
                         cameras, and cash registers. Vistatech achieves 20-year milestone as market
@@ -22,7 +22,7 @@
             <div class="empty-box-watch">
                 <div class="empty-box-watch-inner">
                     <div class="inner-content">
-                        <h2>Lorem Ipsum</h2>
+                        <h1>Lorem Ipsum</h1>
                         <p>Vistatech achieves 20-year milestone as market leader for casio calculators, 
                         electronic organizers, musical instruments, audio equipment, digital
                         cameras, and cash registers. Vistatech achieves 20-year milestone as market
@@ -75,9 +75,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-size: 1vw;
+    line-height: 2vw;
 
-    h2 {
+    h1 {
         color: #a9836b;
+        font-family: "Sample";
     }
 
     p {
@@ -120,6 +123,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: #ffffff;
+    font-size: 1vw;
+    line-height: 2vw;
+
+    h1 {
+        color: #ffffff;
+        font-family: "Sample";
+    }
+
+    p {
+        color: #ffffff;
+    }
 }
 </style>

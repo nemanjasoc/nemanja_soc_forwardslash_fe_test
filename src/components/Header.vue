@@ -82,12 +82,18 @@ export default {
     height: 78px;
     width: 100%;
     border-bottom: 1px solid #e6e6e6;
-    position: sticky;
+    position: fixed;
+    top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1;
+    background-color: #ffffff;
 }
 
 .header {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin: 0 10% 0 10%;
 }
 
 .header-left-side {

@@ -93,7 +93,8 @@
     background-position: center;
     width: 100%;
     height: 809px;
-    border-bottom: 2px solid#2f4061;
+    margin-top: 78px;
+    border-bottom: 3px solid#2f4061;
     position: relative;
 }
 

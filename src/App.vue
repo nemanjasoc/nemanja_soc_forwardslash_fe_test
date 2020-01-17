@@ -4,6 +4,7 @@
     <app-banner></app-banner>
     <app-table></app-table>
     <app-box></app-box>
+    <app-footer></app-footer>
   </div>
 </template>
 
@@ -12,13 +13,15 @@ import Header from './components/Header.vue';
 import Banner from './components/Banner.vue';
 import Table from './components/Table.vue';
 import Box from './components/Box.vue';
+import Footer from './components/Footer.vue';
 
 export default {
   components: {
     appHeader: Header,
     appBanner: Banner,
     appTable: Table,
-    appBox: Box
+    appBox: Box,
+    appFooter: Footer
   }
 }
 </script>
