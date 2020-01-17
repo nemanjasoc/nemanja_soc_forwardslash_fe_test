@@ -13,7 +13,7 @@
                     </div>
 
                     <span class="title-info">Company info</span>
-                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
                 </div>
 
                 <div class="header-right-side">
@@ -29,7 +29,7 @@
                         
                         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                         <span class="company-name">Company Name</span>
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
                 </li>
                 <li>
                     <span class="title-info">Company info</span>
-                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
                 </li>
                 <li class="cart">
                     <div class="cart-badge">0</div>
@@ -60,7 +60,7 @@
                 <li>
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                     <span class="company-name">Company Name</span>
-                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
                 </li>
             </ul>
         </div>
@@ -148,7 +148,7 @@ export default {
     color: #c0a492;
 }
 
-.fa-caret-down {
+.fa-chevron-down {
     color: #c0a492;
     padding-right: 20px;
 }
@@ -159,7 +159,7 @@ export default {
     display: flex;
     align-items: center;
 
-    .fa-caret-down {
+    .fa-chevron-down {
         padding-right: 20px;
         color: #2f4061;
     }
@@ -269,7 +269,7 @@ export default {
         font-size: 17px;
     }
 
-    .fa-caret-down {
+    .fa-chevron-down {
         font-size: 14px;
         padding-right: 13px;
     }
@@ -299,7 +299,7 @@ export default {
 
     .header-second-title-box,
     .title-info,
-    .fa-caret-down,
+    .fa-chevron-down,
     .header-right-side {
         display: none;
     }
@@ -330,7 +330,7 @@ export default {
             display: block;
         }
 
-        .fa-caret-down {
+        .fa-chevron-down {
             display: block;
             color: #c0a492;
             padding-right: 20px;

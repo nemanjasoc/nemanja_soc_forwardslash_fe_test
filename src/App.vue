@@ -2,17 +2,20 @@
   <div id="app">
     <app-header></app-header>
     <app-banner></app-banner>
+    <app-table></app-table>
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue';
 import Banner from './components/Banner.vue';
+import Table from './components/Table.vue';
 
 export default {
   components: {
     appHeader: Header,
-    appBanner: Banner
+    appBanner: Banner,
+    appTable: Table
   }
 }
 </script>
