@@ -1,8 +1,8 @@
 <template>
     <div class="box-container">
-        <div class="box-first-row">
-            <img class="box-runner" src="../assets/images/box-runner.png" alt="box-runner">
-            <div class="empty-box-runner">
+        <div class="box-row">
+            <img class="box-img" src="../assets/images/box-runner.png" alt="box-runner">
+            <div class="empty-box">
                 <div class="empty-box-runner-inner">
                     <div class="inner-content">
                         <h1>Lorem Ipsum</h1>
@@ -18,8 +18,8 @@
             </div>
         </div>
         
-        <div class="box-second-row">
-            <div class="empty-box-watch">
+        <div class="box-row">
+            <div class="empty-box">
                 <div class="empty-box-watch-inner">
                     <div class="inner-content">
                         <h1>Lorem Ipsum</h1>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <img class="box-watch" src="../assets/images/box-watch.png" alt="box-watch">
+            <img class="box-img" src="../assets/images/box-watch.png" alt="box-watch">
         </div>
     </div> 
 </template>
@@ -42,23 +42,26 @@
 </script>
 
 <style lang="scss">
+@import 'src/scss/mixins';
+@import 'src/scss/variables';
+
 .box-container {
     display: flex;
     flex-direction: column;
-    border-top: 2px solid #2f4061;
+    border-top: 3px solid $base-blue;
 }
 
-.box-first-row {
+.box-row {
     display: flex;
     width: 100%;
 }
 
-.box-runner {
+.box-img {
     width: 50%;
     height: auto;
 }
 
-.empty-box-runner {
+.empty-box {
     width: 50%;
     height: auto;
     display: flex;
@@ -67,16 +70,9 @@
 }
 
 .empty-box-runner-inner {
-    width: 90%;
-    height: 70%;
-    background-color: #f5f2ee;
-    position: absolute;
+    background-color: $main-color;
     right: 20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 1vw;
-    line-height: 2vw;
+    @include empty-box-inner;
 
     h1 {
         color: #a9836b;
@@ -96,35 +92,10 @@
     font-size: 1vw;
 }
 
-.box-second-row {
-    display: flex;
-    width: 100%;
-}
-
-.box-watch {
-    width: 50%;
-    height: auto;
-}
-
-.empty-box-watch {
-    width: 50%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
 .empty-box-watch-inner {
-    width: 90%;
-    height: 70%;
     background-color: #2f4061;
-    position: absolute;
     left: 20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 1vw;
-    line-height: 2vw;
+    @include empty-box-inner;
 
     h1 {
         color: #ffffff;

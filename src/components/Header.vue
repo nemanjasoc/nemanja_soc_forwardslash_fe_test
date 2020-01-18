@@ -78,16 +78,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import 'src/scss/variables';
+
 .header-wrapper {
     height: 78px;
     width: 100%;
     border-bottom: 1px solid #e6e6e6;
-    position: fixed;
-    top: 0;
-	left: 0;
-	right: 0;
-	z-index: 1;
-    background-color: #ffffff;
 }
 
 .header {
@@ -96,11 +92,7 @@ export default {
     margin: 0 10% 0 10%;
 }
 
-.header-left-side {
-    display: flex;
-    align-items: center;
-}
-
+.header-left-side,
 .header-right-side {
     display: flex;
     align-items: center;
@@ -112,7 +104,7 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 0 20px;
+    padding-right: 20px;
     font-family: "Sample";
 }
 
@@ -167,7 +159,7 @@ export default {
 
     .fa-chevron-down {
         padding-right: 20px;
-        color: #2f4061;
+        color: $base-blue;
     }
 }
 
@@ -194,7 +186,7 @@ export default {
     align-items: center;
     display: flex;
     justify-content: center;
-    background: #2f4061;
+    background: $base-blue;
     color: #c8cbd4;
 }
 
@@ -219,7 +211,7 @@ export default {
 
 .company-name {
     padding: 0 6px;
-    color: #2f4061;
+    color: $base-blue;
     font-weight: 600;
     font-size: 18px;
     word-spacing: -4px;

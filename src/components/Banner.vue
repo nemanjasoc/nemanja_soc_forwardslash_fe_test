@@ -5,65 +5,18 @@
             :paginationPadding=6 
             paginationColor="#ddccb8" 
             paginationActiveColor="#a0765b">
-            <slide>
+            <slide v-for="slide in slides" :key="slide.id">
                 <div class="slide-container">
                     <div class="slide-wrapper">
-                        <span class="slide-label">G-shock</span>
-                        <span class="slide-title">Venice silver automatic</span>
+                        <span class="slide-label">{{ slide.label }}</span>
+                        <span class="slide-title">{{ slide.title }}</span>
                         <div class="button-wrapper">
-                            <button class="slide-button">View watch</button>
-                            <span class="title-explore">Explore G-SHOCK</span>
+                            <button class="slide-button">{{ slide.button_title }}</button>
+                            <span class="title-explore">{{ slide.title_explore }}</span>
                             <img class="explore-arrow" src="../assets/images/arrow-right.png" alt="explore-arrow">
                         </div>
                     </div>
-                    <img class="banner-watch" src="../assets/images/slider-watch.png" alt="banner-watch">
-                </div>
-            </slide>
-
-            <slide>
-                <div class="slide-container">
-                    <div class="slide-wrapper">
-                        <span class="slide-label">G-shock</span>
-                        <span class="slide-title">Venice silver automatic</span>
-                        <div class="button-wrapper">
-                            <button class="slide-button">View watch</button>
-                            <span class="title-explore">Explore G-SHOCK</span>
-                            <img class="explore-arrow" src="../assets/images/arrow-right.png" alt="explore-arrow">
-                        </div>
-                    </div>
-                    <div class="slide-watch">
-                        <img class="banner-watch" src="../assets/images/slider-watch.png" alt="banner-watch">
-                    </div>
-                </div>
-            </slide>
-
-            <slide>
-                <div class="slide-container">
-                    <div class="slide-wrapper">
-                        <span class="slide-label">G-shock</span>
-                        <span class="slide-title">Venice silver automatic</span>
-                        <div class="button-wrapper">
-                            <button class="slide-button">View watch</button>
-                            <span class="title-explore">Explore G-SHOCK</span>
-                            <img class="explore-arrow" src="../assets/images/arrow-right.png" alt="explore-arrow">
-                        </div>
-                    </div>
-                    <img class="banner-watch" src="../assets/images/slider-watch.png" alt="banner-watch">
-                </div>
-            </slide>
-
-            <slide>
-                <div class="slide-container">
-                    <div class="slide-wrapper">
-                        <span class="slide-label">G-shock</span>
-                        <span class="slide-title">Venice silver automatic</span>
-                        <div class="button-wrapper">
-                            <button class="slide-button">View watch</button>
-                            <span class="title-explore">Explore G-SHOCK</span>
-                            <img class="explore-arrow" src="../assets/images/arrow-right.png" alt="explore-arrow">
-                        </div>
-                    </div>
-                    <img class="banner-watch" src="../assets/images/slider-watch.png" alt="banner-watch">
+                    <img class="banner-watch" :src="getImgUrl(slide.img_watch)" :alt="slide.img_watch">
                 </div>
             </slide>
         </carousel>
@@ -75,26 +28,41 @@
             <div class="right-box">
                 <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
             </div>
-            <div class="watch-thumbnail">
-                <img class="thumbnail-watch-img" src="../assets/images/thumbnail-watch.png" alt="thumbnail-watch">
+            <div class="watch-thumbnail" v-for="thumbnail in thumbnails" :key="thumbnail.id">
+                <img class="thumbnail-watch-img" :src="getImgUrl(thumbnail.img_thumbnail_watch)" :alt="thumbnail.img_thumbnail_watch">
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
+export default {
+    computed: {
+        ...mapGetters([
+            'slides',
+            'thumbnails'
+        ])
+    },
+    methods: {
+        getImgUrl(pic) {
+            return require('../assets/images/'+pic)
+        }
+    }
+}
 </script>
 
 <style lang="scss">
+@import 'src/scss/variables';
+
 .banner-container {
     background-image: url("../assets/images/banner-image.png");
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
     height: 809px;
-    margin-top: 78px;
-    border-bottom: 3px solid#2f4061;
+    border-bottom: 3px solid $base-blue;
     position: relative;
 }
 
@@ -104,18 +72,11 @@
     position: absolute;
     left: 25px;
     top: 280px;
-    font-size: 3px;
 }
 
 .VueCarousel-dot-container[data-v-438fd353] {
     display: flex;
-    margin: 0 auto;
-    padding: 0;
     flex-direction: column;
-}
-
-.VueCarousel-dot[data-v-438fd353] {
-    margin-top: 6px;
 }
 
 .slide-container {

@@ -8,49 +8,46 @@
 
             <div class="select-wrapper">
                 <select>
-                    <option value="0">Brand:</option>
-                    <option value="1">Garmin</option>
-                    <option value="2">Alfred Sung</option>
-                    <option value="3">Wrangler</option>
-                    <option value="4">G-Shock</option>
-                    <option value="5">Schaffhausen</option>
+                    <option v-for="selectedBrand in selectBrands" 
+                        value="selectedBrand.value" 
+                        :key="selectedBrand.value">
+                        {{ selectedBrand.name }}
+                    </option>
                 </select>        
                 <select>
-                    <option value="0">Colours:</option>
-                    <option value="1">Black</option>
-                    <option value="2">Gray</option>
-                    <option value="3">White</option>
-                    <option value="4">Brown</option>
-                    <option value="5">Blue</option>
+                    <option v-for="selectedColour in selectColours" 
+                        value="selectedColour.value" 
+                        :key="selectedColour.value">
+                        {{ selectedColour.color }}
+                    </option>
                 </select>      
                 <select>
-                    <option value="0">Material:</option>
-                    <option value="1">Plastic</option>
-                    <option value="2">Metal</option>
-                    <option value="3">Gum</option>
-                    <option value="4">Gilt</option>
+                    <option v-for="selectedMaterial in selectMaterials" 
+                        value="selectedMaterial.value" 
+                        :key="selectedMaterial.value">
+                        {{ selectedMaterial.material }}
+                    </option>
                 </select>       
                 <select>
-                    <option value="0">Features:</option>
-                    <option value="1">Waterproof</option>
-                    <option value="2">Stopwatch</option>
-                    <option value="3">Automatic</option>
-                    <option value="3">Manual</option>
+                    <option v-for="selectedFeature in selectFeatures" 
+                        value="selectedFeature.value" 
+                        :key="selectedFeature.value">
+                        {{ selectedFeature.feature }}
+                    </option>
                 </select>
                 <select>
-                    <option value="0">Price:</option>
-                    <option value="1">$100.00 - $1,000.00</option>
-                    <option value="2">$1,000.00 - $2,0000.00</option>
-                    <option value="3">$3,000.00 - $4,0000.00</option>
-                    <option value="4">$4,000.00 - $5,0000.00</option>
-                    <option value="5">$5,000.00 - $10,0000.00</option>
-                    <option value="5"> > $10,000.00</option>
+                    <option v-for="selectedPrice in selectPrices" 
+                        value="selectedPrice.value" 
+                        :key="selectedPrice.value">
+                        {{ selectedPrice.price }}
+                    </option>
                 </select>
                 <select>
-                    <option value="0">Gender:</option>
-                    <option value="1">Male</option>
-                    <option value="2">Female</option>
-                    <option value="3">Other</option>
+                    <option v-for="selectedGender in selectGenders" 
+                        value="selectedGender.value" 
+                        :key="selectedGender.value">
+                        {{ selectedGender.gender }}
+                    </option>
                 </select>
             </div>
         </div>
@@ -58,159 +55,83 @@
         <div class="selected-items">
 
         </div>
+
         <div class="table-wrapper">
-        <table>
-            <tr>
-                <th></th>
-                <th>Image</th>
-                <th class="third-col">Brand</th>
-                <th>Item No.</th>
-                <th>Listing</th>
-                <th>Wholesale</th>
-                <th>QTY</th>
-                <th></th>
-                <th></th>
-            </tr>
-            <tr>
-                <td><i class="fa fa-star-o" aria-hidden="true"></i></td>
-                <td><img src="../assets/images/table-watch1.png" alt="table-watch1"></td>
-                <td class="third-col">
-                    <div class="brand-name">ALFRED SUNG</div>
-                    <span class="brand-collection">Slim Collection Series 5</span>
-                </td>
-                <td class="item-no">AS7104SL-1A</td>
-                <td class="table-price">$3,700.00</td>
-                <td class="table-price">$3,700.00</td>
-                <td>
-                    <span class="caret-number">0</span>
-                </td>
-                <td>
-                    <div class="info-stock">
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>
-                        <span class="stock-title">Low on stock</span>
-                    </div>
-                    <button class="add-button">ADD</button>
-                </td>
-                <td>
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                </td>
-            </tr>
-            <tr>
-                <td><i class="fa fa-star-o" aria-hidden="true"></i></td>
-                <td><img src="../assets/images/table-watch2.png" alt="table-watch2"></td>
-                <td class="third-col">
-                    <div class="brand-name">GARMIN</div>
-                    <span class="brand-collection">Classic Collection</span>
-                </td>
-                <td class="item-no">AW2304WE-9Q</td>
-                <td class="table-price">$4,200.00</td>
-                <td class="table-price">$4,000.00</td>
-                <td>
-                    <span class="caret-number">4</span>
-                </td>
-                <td>
-                    <button class="add-button">ADD</button>
-                </td>
-                <td>
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                </td>
-            </tr>
-            <tr>
-                <td><i class="fa fa-star-o" aria-hidden="true"></i></td>
-                <td><img src="../assets/images/table-watch1.png" alt="table-watch1"></td>
-                <td class="third-col">
-                    <div class="brand-name">ALFRED SUNG</div>
-                    <span class="brand-collection">Slim Collection Series 5</span>
-                </td>
-                <td class="item-no">AS7104SL-1A</td>
-                <td class="table-price">$3,700.00</td>
-                <td class="table-price">$3,700.00</td>
-                <td>
-                    <span class="caret-number">0</span>
-                </td>
-                <td>
-                    <button class="add-button">ADD</button>
-                </td>
-                <td>
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                </td>
-            </tr>
-            <tr>
-                <td><i class="fa fa-star-o" aria-hidden="true"></i></td>
-                <td><img src="../assets/images/table-watch3.png" alt="table-watch3"></td>
-                <td class="third-col">
-                    <div class="brand-name">WRANGLER</div>
-                    <span class="brand-collection">Western Collection</span>
-                </td>
-                <td class="item-no">AS7494SL-8R</td>
-                <td class="table-price">$5,600.00</td>
-                <td class="table-price">$5,200.00</td>
-                <td>
-                    <span class="caret-number">0</span>
-                </td>
-                <td>
-                    <button class="add-button">ADD</button>
-                </td>
-                <td>
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                </td>
-            </tr>
-            <tr>
-                <td><i class="fa fa-star-o" aria-hidden="true"></i></td>
-                <td><img src="../assets/images/table-watch1.png" alt="table-watch1"></td>
-                <td class="third-col">
-                    <div class="brand-name">ALFRED SUNG</div>
-                    <span class="brand-collection">Slim Collection Series 5</span>
-                </td>
-                <td class="item-no">AS7104SL-1A</td>
-                <td class="table-price">$3,700.00</td>
-                <td class="table-price">$3,700.00</td>
-                <td>
-                    <span class="caret-number">0</span>
-                </td>
-                <td>
-                    <button class="out-stock-button">
-                        <img src="../assets/images/empty-cart.png" alt="table-watch4">
-                        OUT OF STOCK
-                    </button>
-                </td>
-                <td>
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                </td>
-            </tr>
-            <tr>
-                <td><i class="fa fa-star-o" aria-hidden="true"></i></td>
-                <td><img src="../assets/images/table-watch4.png" alt="table-watch4"></td>
-                <td class="third-col">
-                    <div class="brand-name">GARMIN</div>
-                    <span class="brand-collection">Classic Collection Series 6</span>
-                </td>
-                <td class="item-no">AS2E0G8E-2U</td>
-                <td class="table-price">$2,100.00</td>
-                <td class="table-price">$2,000.00</td>
-                <td>
-                    <span class="caret-number">0</span>
-                </td>
-                <td>
-                    <button class="add-button">ADD</button>
-                </td>
-                <td>
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                </td>
-            </tr>
-        </table>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Image</th>
+                    <th class="third-col">Brand</th>
+                    <th>Item No.</th>
+                    <th>Listing</th>
+                    <th>Wholesale</th>
+                    <th>QTY</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr v-for="tableRow in tableRows" :key="tableRow.id">
+                    <td><i class="fa fa-star-o" aria-hidden="true"></i></td>
+                    <td><img :src="getImgUrl(tableRow.img_table_watch)" :alt="tableRow.img_table_watch"></td>
+                    <td class="third-col">
+                        <div class="brand-name">{{ tableRow.brand_name }}</div>
+                        <span class="brand-collection">{{ tableRow.brand_collection }}</span>
+                    </td>
+                    <td class="item-no">{{ tableRow.item_no }}</td>
+                    <td class="table-price">{{ tableRow.listing_price }}</td>
+                    <td class="table-price">{{ tableRow.wholesale_price }}</td>
+                    <td>
+                        <span class="caret-number">{{ tableRow.caret_number }}</span>
+                    </td>
+                    <td>
+                        <div class="info-stock" v-if="tableRow.low_on_stock">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            <span class="stock-title">Low on stock</span>
+                        </div>
+                        <button class="add-button" v-if="!tableRow.out_of_stock">ADD</button>
+                        <button class="out-stock-button" v-if="tableRow.out_of_stock">
+                            <img src="../assets/images/empty-cart.png" alt="table-watch4">
+                            OUT OF STOCK
+                        </button>
+                    </td>
+                    <td>
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
+export default {
+    computed: {
+        ...mapGetters([
+            'selectBrands',
+            'selectColours',
+            'selectMaterials',
+            'selectFeatures',
+            'selectPrices',
+            'selectGenders',
+            'tableRows'
+        ])
+    },
+    methods: {
+        getImgUrl(pic) {
+            return require('../assets/images/'+pic)
+        }
+    }
+}
 </script>
 
 <style lang="scss">
+@import 'src/scss/variables';
+
 .rectangle {
     width: 100%;
     height: 166px;
-    background-color: #f5f2ee;
+    background-color: $main-color;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -374,7 +295,7 @@ th {
     width: 134px;
     outline: none;
     border: none;
-    background-color: #2f4061;
+    background-color: $base-blue;
     color: #ffffff;
     padding-right: 32px;
     font-weight: 500;
@@ -394,7 +315,7 @@ th {
     background-color: #ffffff;
     outline: none;
     border: none;
-    color: #2f4061;
+    color: $base-blue;
     font-size: 11px;
     font-weight: 600;
 
