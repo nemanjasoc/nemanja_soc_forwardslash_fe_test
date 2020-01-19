@@ -64,6 +64,7 @@ export default {
     height: 809px;
     border-bottom: 3px solid $base-blue;
     position: relative;
+    margin-top: 78px;
 }
 
 .VueCarousel-pagination[data-v-438fd353] {

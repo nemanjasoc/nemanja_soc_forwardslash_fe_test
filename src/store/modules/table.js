@@ -157,7 +157,9 @@ const state = {
             listing_price: '$3,700.00',
             wholesale_price: '$3,700.00',
             caret_number: 0,
-            low_on_stock: true
+            low_on_stock: true,
+            isBrown: false,
+            showMore: false
         },
         {
             id: 2,
@@ -167,7 +169,9 @@ const state = {
             item_no: 'AW2304WE-9Q',
             listing_price: '$4,200.00',
             wholesale_price: '$4,000.00',
-            caret_number: 4
+            caret_number: 4,
+            isBrown: false,
+            showMore: false
         },
         {
             id: 3,
@@ -177,7 +181,9 @@ const state = {
             item_no: 'AS7104SL-1A',
             listing_price: '$3,700.00',
             wholesale_price: '$3,700.00',
-            caret_number: 0
+            caret_number: 0,
+            isBrown: false,
+            showMore: false
         },
         {
             id: 4,
@@ -187,7 +193,9 @@ const state = {
             item_no: 'AS7494SL-8R',
             listing_price: '$5,600.00',
             wholesale_price: '$5,200.00',
-            caret_number: 0
+            caret_number: 0,
+            isBrown: false,
+            showMore: false
         },
         {
             id: 5,
@@ -198,7 +206,9 @@ const state = {
             listing_price: '$3,700.00',
             wholesale_price: '$3,700.00',
             caret_number: 0,
-            out_of_stock: true
+            out_of_stock: true,
+            isBrown: false,
+            showMore: false
         },
         {
             id: 6,
@@ -208,7 +218,9 @@ const state = {
             item_no: 'AS2E0G8E-2U',
             listing_price: '$2,100.00',
             wholesale_price: '$2,000.00',
-            caret_number: 0
+            caret_number: 0,
+            isBrown: false,
+            showMore: false
         }
     ]
 }

@@ -69,8 +69,11 @@
                     <th></th>
                     <th></th>
                 </tr>
-                <tr v-for="tableRow in tableRows" :key="tableRow.id">
-                    <td><i class="fa fa-star-o" aria-hidden="true"></i></td>
+                <tr v-for="tableRow in tableRows" :key="tableRow.id" @click="tableRow.showMore = !tableRow.showMore">
+                    <td>
+                        <i @click="tableRow.isBrown = !tableRow.isBrown" class="fa fa-star-o" aria-hidden="true" :class="{ inactive: tableRow.isBrown }"></i>
+                        <i @click="tableRow.isBrown = !tableRow.isBrown" class="fa fa-star" aria-hidden="true" :class="{ inactive: !tableRow.isBrown }"></i>
+                    </td>
                     <td><img :src="getImgUrl(tableRow.img_table_watch)" :alt="tableRow.img_table_watch"></td>
                     <td class="third-col">
                         <div class="brand-name">{{ tableRow.brand_name }}</div>
@@ -96,6 +99,26 @@
                     <td>
                         <i class="fa fa-chevron-down" aria-hidden="true"></i>
                     </td>
+                    <div class="row-footer" :class="{ inactive: !tableRow.showMore }">
+                        <td>
+                           
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                           
+                        </td>
+                        <td>
+                           
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </div>
                 </tr>
             </table>
         </div>
@@ -204,14 +227,37 @@ table {
     margin: 2% 10% 0 10%; 
 }
 
+tr {
+    cursor: pointer;
+    position: relative;
+}
+
 th, td {
     padding: 5px;
     text-align: center;
 }
 
+td {
+    position: relative;
+}
+
 th {
     color: #a3acc0;
     border-bottom: 1px solid #dbcdc4;
+}
+
+.row-footer {
+    position: absolute;
+    height: 30px;
+    left: 10%;
+    right: 10%;
+    border: 1px solid gray;
+    font-size: 12px;
+    transition: all 0.3s ease-in-out 0s;
+
+    &.inactive {
+        height: 0;
+    }
 }
 
 .third-col {
@@ -220,6 +266,20 @@ th {
 
 .fa-star-o {
     color: #a9836b;
+    cursor: pointer;
+
+    &.inactive {
+        display: none;
+    }
+}
+
+.fa-star {
+    color: #a9836b;
+    cursor: pointer;
+
+    &.inactive {
+        display: none;
+    }
 }
 
 .brand-name {
@@ -287,6 +347,7 @@ th {
 
 .fa-info-circle {
     color: #d47517;
+    cursor: pointer;
 }
 
 .add-button {

@@ -93,7 +93,7 @@
 }
 
 .empty-box-watch-inner {
-    background-color: #2f4061;
+    background-color: $base-blue;
     left: 20%;
     @include empty-box-inner;
 

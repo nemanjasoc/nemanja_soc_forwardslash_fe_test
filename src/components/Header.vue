@@ -80,10 +80,20 @@ export default {
 <style lang="scss">
 @import 'src/scss/variables';
 
+header {
+    position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+
 .header-wrapper {
     height: 78px;
     width: 100%;
     border-bottom: 1px solid #e6e6e6;
+    background: white;
+    height: 78px;
 }
 
 .header {
@@ -315,6 +325,7 @@ export default {
         flex-direction: column;
         align-items: center;
         background-color: #ffffff;
+        margin-top: 0;
 
         li {
             padding: 10px;
