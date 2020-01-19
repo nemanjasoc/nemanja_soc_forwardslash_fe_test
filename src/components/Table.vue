@@ -69,57 +69,70 @@
                     <th></th>
                     <th></th>
                 </tr>
-                <tr v-for="tableRow in tableRows" :key="tableRow.id" @click="tableRow.showMore = !tableRow.showMore">
-                    <td>
-                        <i @click="tableRow.isBrown = !tableRow.isBrown" class="fa fa-star-o" aria-hidden="true" :class="{ inactive: tableRow.isBrown }"></i>
-                        <i @click="tableRow.isBrown = !tableRow.isBrown" class="fa fa-star" aria-hidden="true" :class="{ inactive: !tableRow.isBrown }"></i>
-                    </td>
-                    <td><img :src="getImgUrl(tableRow.img_table_watch)" :alt="tableRow.img_table_watch"></td>
-                    <td class="third-col">
-                        <div class="brand-name">{{ tableRow.brand_name }}</div>
-                        <span class="brand-collection">{{ tableRow.brand_collection }}</span>
-                    </td>
-                    <td class="item-no">{{ tableRow.item_no }}</td>
-                    <td class="table-price">{{ tableRow.listing_price }}</td>
-                    <td class="table-price">{{ tableRow.wholesale_price }}</td>
-                    <td>
-                        <span class="caret-number">{{ tableRow.caret_number }}</span>
-                    </td>
-                    <td>
-                        <div class="info-stock" v-if="tableRow.low_on_stock">
-                            <i class="fa fa-info-circle" aria-hidden="true"></i>
-                            <span class="stock-title">Low on stock</span>
-                        </div>
-                        <button class="add-button" v-if="!tableRow.out_of_stock">ADD</button>
-                        <button class="out-stock-button" v-if="tableRow.out_of_stock">
-                            <img src="../assets/images/empty-cart.png" alt="table-watch4">
-                            OUT OF STOCK
-                        </button>
-                    </td>
-                    <td>
-                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                    </td>
-                    <div class="row-footer" :class="{ inactive: !tableRow.showMore }">
+                <tbody v-for="tableRow in tableRows" :key="tableRow.id" @click="tableRow.showMore = !tableRow.showMore" :class="{ inactive: !tableRow.showMore }">
+                    <tr :class="{ inactive: !tableRow.showMore }">
                         <td>
-                           
+                            <i @click="tableRow.isBrown = !tableRow.isBrown" class="fa fa-star-o" aria-hidden="true" :class="{ inactive: tableRow.isBrown }"></i>
+                            <i @click="tableRow.isBrown = !tableRow.isBrown" class="fa fa-star" aria-hidden="true" :class="{ inactive: !tableRow.isBrown }"></i>
+                        </td>
+                        <td><img :src="getImgUrl(tableRow.img_table_watch)" :alt="tableRow.img_table_watch"></td>
+                        <td class="third-col">
+                            <div class="brand-name">{{ tableRow.brand_name }}</div>
+                            <span class="brand-collection">{{ tableRow.brand_collection }}</span>
+                        </td>
+                        <td class="item-no">{{ tableRow.item_no }}</td>
+                        <td class="table-price">{{ tableRow.listing_price }}</td>
+                        <td class="table-price">{{ tableRow.wholesale_price }}</td>
+                        <td>
+                            <span class="caret-number">{{ tableRow.caret_number }}</span>
                         </td>
                         <td>
-                            
+                            <div class="info-stock" v-if="tableRow.low_on_stock">
+                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                <span class="stock-title">Low on stock</span>
+                            </div>
+                            <button class="add-button" v-if="!tableRow.out_of_stock">ADD</button>
+                            <button class="out-stock-button" v-if="tableRow.out_of_stock">
+                                <img src="../assets/images/empty-cart.png" alt="table-watch4">
+                                OUT OF STOCK
+                            </button>
                         </td>
                         <td>
-                           
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </td>
+                    </tr>
+                    <tr class="row-footer" :class="{ inactive: !tableRow.showMore }">
+                        <td>
+                            <span>more info</span>
                         </td>
                         <td>
-                           
+                            <span>more info</span>
                         </td>
                         <td>
-                            
+                            <span>more info</span>
                         </td>
                         <td>
-                            
+                            <span>more info</span>
                         </td>
-                    </div>
-                </tr>
+                        <td>
+                            <span>more info</span>
+                        </td>
+                        <td>
+                            <span>more info</span>
+                        </td>
+                        <td>
+                            <span>more info</span>
+                        </td>
+                        <td>
+                            <span>more info</span>
+                        </td>
+                        <td>
+                            <a href="http://www.google.com" target="_blank">
+                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -150,6 +163,7 @@ export default {
 
 <style lang="scss">
 @import 'src/scss/variables';
+@import 'src/scss/mixins';
 
 .rectangle {
     width: 100%;
@@ -227,18 +241,27 @@ table {
     margin: 2% 10% 0 10%; 
 }
 
+tbody {
+    border: 1px solid #ddccb8;
+    @include box-shadow(0px -10px 35px -7px #f5f2ee);
+
+    &.inactive {
+        border: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        -o-box-shadow: none;
+        box-shadow: none;
+    }
+
+}
+
 tr {
     cursor: pointer;
-    position: relative;
 }
 
 th, td {
     padding: 5px;
     text-align: center;
-}
-
-td {
-    position: relative;
 }
 
 th {
@@ -247,17 +270,19 @@ th {
 }
 
 .row-footer {
-    position: absolute;
     height: 30px;
-    left: 10%;
-    right: 10%;
-    border: 1px solid gray;
+    border: 1px solid #ddccb8;
     font-size: 12px;
-    transition: all 0.3s ease-in-out 0s;
+    color: #7583a0;
+    @include box-shadow(0px 8px 10px #f5f2ee, -10px 8px 15px #f5f2ee, 10px 8px 15px #f5f2ee);
 
     &.inactive {
-        height: 0;
+        display: none;
     }
+}
+
+.fa-external-link {
+    color: #926d56;
 }
 
 .third-col {

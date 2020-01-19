@@ -55,6 +55,7 @@ export default {
 
 <style lang="scss">
 @import 'src/scss/variables';
+@import 'src/scss/mixins';
 
 .banner-container {
     background-image: url("../assets/images/banner-image.png");
@@ -131,6 +132,7 @@ export default {
     margin-bottom: 15px;
     font-size: 16px;
     letter-spacing: 5px;
+    @include box-shadow(0px 10px 35px 0px #ddccb8);
 }
 
 .fa-long-arrow-right {

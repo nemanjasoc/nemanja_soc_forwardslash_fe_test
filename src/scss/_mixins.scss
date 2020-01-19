@@ -8,3 +8,10 @@
     font-size: 1vw;
     line-height: 2vw;
 }
+
+@mixin box-shadow($property...) {
+	-webkit-box-shadow: $property;
+    -moz-box-shadow: $property;
+    -o-box-shadow: $property;
+    box-shadow: $property;
+}
