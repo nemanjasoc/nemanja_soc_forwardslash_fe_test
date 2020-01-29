@@ -7,53 +7,79 @@
             </form>
 
             <div class="select-wrapper">
-                <select>
-                    <option v-for="selectedBrand in selectBrands" 
-                        value="selectedBrand.value" 
-                        :key="selectedBrand.value">
-                        {{ selectedBrand.name }}
+                <select v-model="brandItem" @change="selectedBrandOption(brandItem)">
+                    <option value="">Brands:</option>
+                    <option v-for="selectedBrand in selectBrands" :value="selectedBrand" :key="selectedBrand.value">
+                        <label>{{ selectedBrand.option }}</label>
                     </option>
                 </select>        
-                <select>
-                    <option v-for="selectedColour in selectColours" 
-                        value="selectedColour.value" 
-                        :key="selectedColour.value">
-                        {{ selectedColour.color }}
+                <select v-model="colorItem" @change="selectedColorOption(colorItem)">
+                    <option value="">Colors:</option>
+                    <option v-for="selectedColor in selectColors" :value="selectedColor" :key="selectedColor.value">
+                        <label>{{ selectedColor.option }}</label>
                     </option>
                 </select>      
-                <select>
-                    <option v-for="selectedMaterial in selectMaterials" 
-                        value="selectedMaterial.value" 
-                        :key="selectedMaterial.value">
-                        {{ selectedMaterial.material }}
+                <select v-model="materialItem" @change="selectedMaterialOption(materialItem)">
+                    <option value="">Materials:</option>
+                    <option v-for="selectedMaterial in selectMaterials" :value="selectedMaterial" :key="selectedMaterial.value">
+                        <label>{{ selectedMaterial.option }}</label>
                     </option>
                 </select>       
-                <select>
-                    <option v-for="selectedFeature in selectFeatures" 
-                        value="selectedFeature.value" 
-                        :key="selectedFeature.value">
-                        {{ selectedFeature.feature }}
+                <select v-model="featureItem" @change="selectedFeatureOption(featureItem)">
+                    <option value="">Features:</option>
+                    <option v-for="selectedFeature in selectFeatures" :value="selectedFeature" :key="selectedFeature.value">
+                        <label>{{ selectedFeature.option }}</label>
                     </option>
                 </select>
-                <select>
-                    <option v-for="selectedPrice in selectPrices" 
-                        value="selectedPrice.value" 
-                        :key="selectedPrice.value">
-                        {{ selectedPrice.price }}
+                <select v-model="priceItem" @change="selectedPriceOption(priceItem)">
+                    <option value="">Price:</option>
+                    <option v-for="selectedPrice in selectPrices" :value="selectedPrice" :key="selectedPrice.value">
+                        <label>{{ selectedPrice.option }}</label>
                     </option>
                 </select>
-                <select>
-                    <option v-for="selectedGender in selectGenders" 
-                        value="selectedGender.value" 
-                        :key="selectedGender.value">
-                        {{ selectedGender.gender }}
+                <select v-model="genderItem" @change="selectedGenderOption(genderItem)">
+                    <option value="">Gender:</option>
+                    <option v-for="selectedGender in selectGenders" :value="selectedGender" :key="selectedGender.value">
+                        <label>{{ selectedGender.option }}</label>
                     </option>
                 </select>
             </div>
         </div>
         
         <div class="selected-items">
+            <div class="selected-item" v-for="brandItem in brandItems">{{ brandItem.option }}
+                <span class="close-item" @click="closeBrandItem(brandItem)">X</span>
+            </div>
+        </div>
 
+        <div class="selected-items">
+            <div class="selected-item" v-for="colorItem in colorItems">{{ colorItem.option }}
+                <span class="close-item" @click="closeColorItem(colorItem)">X</span>
+            </div>
+        </div>
+
+        <div class="selected-items">
+            <div class="selected-item" v-for="materialItem in materialItems">{{ materialItem.option }}
+                <span class="close-item" @click="closeMaterialItem(materialItem)">X</span>
+            </div>
+        </div>
+
+        <div class="selected-items">
+            <div class="selected-item" v-for="featureItem in featureItems">{{ featureItem.option }}
+                <span class="close-item" @click="closeFeatureItem(featureItem)">X</span>
+            </div>
+        </div>
+
+        <div class="selected-items">
+            <div class="selected-item" v-for="priceItem in priceItems">{{ priceItem.option }}
+                <span class="close-item" @click="closePriceItem(priceItem)">X</span>
+            </div>
+        </div>
+
+        <div class="selected-items">
+            <div class="selected-item" v-for="genderItem in genderItems">{{ genderItem.option }}
+                <span class="close-item" @click="closeGenderItem(genderItem)">X</span>
+            </div>
         </div>
 
         <div class="table-wrapper">
@@ -142,10 +168,26 @@
 import { mapGetters } from 'vuex';
 
 export default {
+    data() {
+        return {
+            brandItems: [],
+            brandItem: {},
+            colorItems: [],
+            colorItem: {},
+            materialItems: [],
+            materialItem: {},
+            featureItems: [],
+            featureItem: {},
+            priceItems: [],
+            priceItem: {},
+            genderItems: [],
+            genderItem: {}
+        }
+    },
     computed: {
         ...mapGetters([
             'selectBrands',
-            'selectColours',
+            'selectColors',
             'selectMaterials',
             'selectFeatures',
             'selectPrices',
@@ -156,6 +198,126 @@ export default {
     methods: {
         getImgUrl(pic) {
             return require('../assets/images/'+pic)
+        },
+        selectedBrandOption(brandItem) {
+            brandItem.selected = true;
+            this.brandItems.push(brandItem)
+            console.log('selectedBrandOptionObj: ', this.brandItems)
+        },
+        closeBrandItem(brandItem) {
+            brandItem.selected = false;
+            var newBrandItems = [];
+
+            for (let i = 0; i < this.brandItems.length; i++) {
+                let currentBrandItem = this.brandItems[i];
+
+                if (currentBrandItem.selected !== brandItem.selected) {
+                    newBrandItems.push(currentBrandItem)
+                }
+            }
+
+            this.brandItems = newBrandItems;
+            console.log("newBrandItems: ", this.brandItems)
+        },
+        selectedColorOption(colorItem) {
+            colorItem.selected = true;
+            this.colorItems.push(colorItem)
+            console.log('selectedColorOptionObj: ', this.colorItems)
+        },
+        closeColorItem(colorItem) {
+            colorItem.selected = false;
+            var newColorItems = [];
+
+            for (let i = 0; i < this.colorItems.length; i++) {
+                let currentColorItem = this.colorItems[i];
+
+                if (currentColorItem.selected !== colorItem.selected) {
+                    newColorItems.push(currentColorItem)
+                }
+            }
+
+            this.colorItems = newColorItems;
+            console.log("newColorItems: ", this.colorItems)
+        },
+        selectedMaterialOption(materialItem) {
+            materialItem.selected = true;
+            this.materialItems.push(materialItem)
+            console.log('selectedMaterialOptionObj: ', this.materialItems)
+        },
+        closeMaterialItem(materialItem) {
+            materialItem.selected = false;
+            var newMaterialItems = [];
+
+            for (let i = 0; i < this.materialItems.length; i++) {
+                let currentMaterialItem = this.materialItems[i];
+
+                if (currentMaterialItem.selected !== materialItem.selected) {
+                    newMaterialItems.push(currentMaterialItem)
+                }
+            }
+
+            this.materialItems = newMaterialItems;
+            console.log("newMaterialItems: ", this.materialItems)
+        },
+        selectedFeatureOption(featureItem) {
+            featureItem.selected = true;
+            this.featureItems.push(featureItem)
+            console.log('selectedFeatureOptionObj: ', this.featureItems)
+        },
+        closeFeatureItem(featureItem) {
+            featureItem.selected = false;
+            var newFeatureItems = [];
+
+            for (let i = 0; i < this.featureItems.length; i++) {
+                let currentFeatureItem = this.featureItems[i];
+
+                if (currentFeatureItem.selected !== featureItem.selected) {
+                    newFeatureItems.push(currentFeatureItem)
+                }
+            }
+
+            this.featureItems = newFeatureItems;
+            console.log("newFeatureItems: ", this.featureItems)
+        },
+        selectedPriceOption(priceItem) {
+            priceItem.selected = true;
+            this.priceItems.push(priceItem)
+            console.log('selectedPriceOptionObj: ', this.priceItems)
+        },
+        closePriceItem(priceItem) {
+            priceItem.selected = false;
+            var newPriceItems = [];
+
+            for (let i = 0; i < this.priceItems.length; i++) {
+                let currentPriceItem = this.priceItems[i];
+
+                if (currentPriceItem.selected !== priceItem.selected) {
+                    newPriceItems.push(currentPriceItem)
+                }
+            }
+
+            this.priceItems = newPriceItems;
+            console.log("newPriceItems: ", this.priceItems)
+        },
+        selectedGenderOption(genderItem) {
+            genderItem.selected = true;
+            this.genderItems.push(genderItem)
+            console.log('selectedGenderOptionObj: ', this.genderItems)
+        },
+        closeGenderItem(genderItem) {
+            genderItem.selected = false;
+            var newGenderItems = [];
+
+            for (let i = 0; i < this.genderItems.length; i++) {
+                let currentGenderItem = this.genderItems[i];
+
+                if (currentGenderItem.selected !== genderItem.selected) {
+                    newGenderItems.push(currentGenderItem)
+                }
+            }
+
+            this.genderItems = newGenderItems;
+            console.log("newGenderItems: ", this.genderItems)
         }
     }
 }
@@ -227,6 +389,33 @@ select {
     border: 1px solid #ddccb8;
     padding-left: 6px;
     font-size: 16px;
+}
+
+.selected-items {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.selected-item {
+    width: 15%;
+    height: 41px;
+    color: #b4947f;
+    border-radius: 25px;
+    border: 1px solid #ddccb8;
+    padding-left: 6px;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.close-item {
+    cursor: pointer;
+    margin-right: 10px;
 }
 
 .table-wrapper {

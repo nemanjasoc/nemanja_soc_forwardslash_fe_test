@@ -1,150 +1,126 @@
 const state = {
     selectBrands:[
         {
-            value: 0,
-            name: 'Brand:'
-        },
-        {
             value: 1,
-            name: 'Garmin'
+            option: 'Garmin'
         },
         {
             value: 2,
-            name: 'Alfred Sung'
+            option: 'Alfred Sung'
         },
         {
             value: 3,
-            name: 'Wrangler'
+            option: 'Wrangler'
         },
         {
             value: 4,
-            name: 'G-Shock'
+            option: 'G-Shock'
         },
         {
             value: 5,
-            name: 'Schaffhausen'
+            option: 'Schaffhausen'
         }
     ],
-    selectColours:[
-        {
-            value: 0,
-            color: 'Colours:'
-        },
+    selectColors:[
         {
             value: 1,
-            color: 'Black'
+            option: 'Black'
         },
         {
             value: 2,
-            color: 'Gray'
+            option: 'Gray'
         },
         {
             value: 3,
-            color: 'White'
+            option: 'White'
         },
         {
             value: 4,
-            color: 'Brown'
+            option: 'Brown'
         },
         {
             value: 5,
-            color: 'Blue'
+            option: 'Blue'
         }
     ],
     selectMaterials:[
         {
-            value: 0,
-            material: 'Materials:'
-        },
-        {
             value: 1,
-            material: 'Plastic'
+            option: 'Plastic'
         },
         {
             value: 2,
-            material: 'Metal'
+            option: 'Metal'
         },
         {
             value: 3,
-            material: 'Gum'
+            option: 'Gum'
         },
         {
             value: 4,
-            material: 'Gilt'
+            option: 'Gilt'
         }
     ],
     selectFeatures:[
         {
-            value: 0,
-            feature: 'Features:'
-        },
-        {
             value: 1,
-            feature: 'Waterproof'
+            option: 'Waterproof'
         },
         {
             value: 2,
-            feature: 'Stopwatch'
+            option: 'Stopwatch'
         },
         {
             value: 3,
-            feature: 'Automatic'
+            option: 'Automatic'
         },
         {
             value: 4,
-            feature: 'Manual'
+            option: 'Manual'
         }
     ],
     selectPrices:[
         {
-            value: 0,
-            price: 'Price:'
-        },
-        {
             value: 1,
-            price: '$100.00 - $1,000.00'
+            option: '$100.00 - $1,000.00'
         },
         {
             value: 2,
-            price: '$1,000.00 - $2,000.00'
+            option: '$1,000.00 - $2,000.00'
         },
         {
             value: 3,
-            price: '$2,000.00 - $4,000.00'
+            option: '$2,000.00 - $4,000.00'
         },
         {
             value: 4,
-            price: '$4,000.00 - $6,000.00'
+            option: '$4,000.00 - $6,000.00'
         },
         {
             value: 5,
-            price: '$6,000.00 - $8,000.00'
+            option: '$6,000.00 - $8,000.00'
         },
         {
             value: 6,
-            price: '$8,000.00 - $10,000.00'
+            option: '$8,000.00 - $10,000.00'
         },
         {
             value: 7,
-            price: '> $10,000.00'
+            option: '> $10,000.00'
         }
     ],
     selectGenders:[
         {
-            value: 0,
-            gender: 'Gender:'
-        },
-        {
             value: 1,
-            gender: 'Male'
+            option: 'Male'
         },
         {
             value: 2,
-            gender: 'Female'
+            option: 'Female'
         },
         {
             value: 3,
-            gender: 'Other'
+            option: 'Other'
         }
     ],
     tableRows:[
@@ -229,8 +205,8 @@ const getters = {
     selectBrands: function (state) {
         return state.selectBrands;
     },
-    selectColours: function (state) {
-        return state.selectColours;
+    selectColors: function (state) {
+        return state.selectColors;
     },
     selectMaterials: function (state) {
         return state.selectMaterials;
