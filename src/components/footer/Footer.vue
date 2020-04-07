@@ -35,7 +35,7 @@
 <script>
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import 'src/scss/variables';
 
 footer {

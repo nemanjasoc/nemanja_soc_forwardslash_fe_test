@@ -13,7 +13,7 @@
                         <div class="button-wrapper">
                             <button class="slide-button">{{ slide.button_title }}</button>
                             <span class="title-explore">{{ slide.title_explore }}</span>
-                            <img class="explore-arrow" src="../assets/images/arrow-right.png" alt="explore-arrow">
+                            <img class="explore-arrow" src="../../assets/images/arrow-right.png" alt="explore-arrow">
                         </div>
                     </div>
                     <img class="banner-watch" :src="getImgUrl(slide.img_watch)" :alt="slide.img_watch">
@@ -23,13 +23,13 @@
 
         <div class="slider-boxes">
             <div class="left-box">
-                <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                <i class="fa fa-long-arrow-left" aria-hidden="true" @mouseover="showPreviousWatchThumbnailImage" @mouseleave="hidePreviousWatchThumbnailImage"></i>
             </div>
             <div class="right-box">
-                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-            </div>
-            <div class="watch-thumbnail" v-for="thumbnail in thumbnails" :key="thumbnail.id">
-                <img class="thumbnail-watch-img" :src="getImgUrl(thumbnail.img_thumbnail_watch)" :alt="thumbnail.img_thumbnail_watch">
+                <i class="fa fa-long-arrow-right" aria-hidden="true" @mouseover="showNextWatchThumbnailImage" @mouseleave="hideNextWatchThumbnailImage"></i>
+            </div>     
+            <div class="watch-thumbnail">
+                <img class="thumbnail-watch-img" :src="('src/assets/images/' + watchThumbnailImage)" alt="thumbnail-img">
             </div>
         </div>
     </div>
@@ -42,23 +42,84 @@ export default {
     computed: {
         ...mapGetters([
             'slides',
-            'thumbnails'
+            'thumbnailImages'
         ])
     },
+    data() {
+        return {
+            watchThumbnailImage: 'thumbnail-watch.png'
+        }
+    },
     methods: {
+        showPreviousWatchThumbnailImage() {
+            var newImage = '';
+            
+            for (let i = 0; i < this.thumbnailImages.length; i++) {
+                let currentThumbnailImage = this.thumbnailImages[i];
+                let prevThumbnailImage = this.thumbnailImages[i-1];
+               
+                if (currentThumbnailImage.img_thumbnail_watch.indexOf(this.watchThumbnailImage) != -1) {
+                    newImage = prevThumbnailImage;
+                }
+            }
+
+            this.watchThumbnailImage = newImage.img_thumbnail_watch;
+        },
+        hidePreviousWatchThumbnailImage() {
+            var newImage = '';
+            
+            for (let i = 0; i < this.thumbnailImages.length; i++) {
+                let currentThumbnailImage = this.thumbnailImages[i];
+                let nextThumbnailImage = this.thumbnailImages[i+1];
+               
+                if (currentThumbnailImage.img_thumbnail_watch.indexOf(this.watchThumbnailImage) != -1) {
+                    newImage = nextThumbnailImage;
+                }
+            }
+
+            this.watchThumbnailImage = newImage.img_thumbnail_watch;
+        },
+        showNextWatchThumbnailImage() {
+            var newImage = '';
+            
+            for (let i = 0; i < this.thumbnailImages.length; i++) {
+                let currentThumbnailImage = this.thumbnailImages[i];
+                let nextThumbnailImage = this.thumbnailImages[i+1];
+               
+                if (currentThumbnailImage.img_thumbnail_watch.indexOf(this.watchThumbnailImage) != -1) {
+                    newImage = nextThumbnailImage;
+                }
+            }
+
+            this.watchThumbnailImage = newImage.img_thumbnail_watch;
+        },
+        hideNextWatchThumbnailImage() {
+            var newImage = '';
+            
+            for (let i = 0; i < this.thumbnailImages.length; i++) {
+                let currentThumbnailImage = this.thumbnailImages[i];
+                let prevThumbnailImage = this.thumbnailImages[i-1];
+               
+                if (currentThumbnailImage.img_thumbnail_watch.indexOf(this.watchThumbnailImage) != -1) {
+                    newImage = prevThumbnailImage;
+                }
+            }
+
+            this.watchThumbnailImage = newImage.img_thumbnail_watch;
+        },
         getImgUrl(pic) {
-            return require('../assets/images/'+pic)
+            return require('../../assets/images/'+pic)
         }
     }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import 'src/scss/variables';
 @import 'src/scss/mixins';
 
 .banner-container {
-    background-image: url("../assets/images/banner-image.png");
+    background-image: url("../../assets/images/banner-image.png");
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
@@ -94,6 +155,12 @@ export default {
     display: flex;
     flex-direction: column;
     width: 48%;
+}
+
+.banner-watch {
+    width: 263px;
+    height: 427px;
+    background-color: transparent;
 }
 
 .button-wrapper {
@@ -299,7 +366,7 @@ export default {
         height: 80px;
     }
 
-    .thumbnail-watch-img {
+    .thumbnail-watch-img1 {
         width: 32px;
         height: 52px;
     }

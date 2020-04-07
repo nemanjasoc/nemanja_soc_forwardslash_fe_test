@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="rectangle">
+        <app-sidebar></app-sidebar>
+        <section class="rectangle">
             <form class="form-input">
                 <i class="fa fa-search" aria-hidden="true"></i>
                 <input class="input-field" type="text" placeholder="Type here to search...">
@@ -44,7 +45,7 @@
                     </option>
                 </select>
             </div>
-        </div>
+        </section>
         
         <div class="selected-items">
             <div class="selected-item" v-for="brandItem in brandItems">{{ brandItem.option }}
@@ -107,19 +108,29 @@
                             <span class="brand-collection">{{ tableRow.brand_collection }}</span>
                         </td>
                         <td class="item-no">{{ tableRow.item_no }}</td>
-                        <td class="table-price">{{ tableRow.listing_price }}</td>
-                        <td class="table-price">{{ tableRow.wholesale_price }}</td>
+                        <td class="table-price">{{ tableRow.listing_price | toCurrency }}</td>
+                        <td class="table-price">{{ tableRow.wholesale_price | toCurrency }}</td>
                         <td>
-                            <span class="caret-number">{{ tableRow.caret_number }}</span>
+                            <div class="qty">
+                                <span class="caret-quantity">{{ tableRow.quantity }}</span>
+                                <div class="carets">
+                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </div>
+                            </div>
                         </td>
                         <td>
                             <div class="info-stock" v-if="tableRow.low_on_stock">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i>
                                 <span class="stock-title">Low on stock</span>
                             </div>
-                            <button class="add-button" v-if="!tableRow.out_of_stock">ADD</button>
+                            <button class="add-button" 
+                                @click="switchButtonAndAddWatch(tableRow)" 
+                                v-if="!tableRow.out_of_stock && !tableRow.added">
+                                ADD</button>
+                            <button class="added-button" @click="switchAdd(tableRow)" v-if="!tableRow.out_of_stock && tableRow.added">ADDED</button>
                             <button class="out-stock-button" v-if="tableRow.out_of_stock">
-                                <img src="../assets/images/empty-cart.png" alt="table-watch4">
+                                <img src="../../assets/images/empty-cart.png" alt="table-watch4">
                                 OUT OF STOCK
                             </button>
                         </td>
@@ -166,8 +177,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import Sidebar from '../sidebar/Sidebar.vue';
 
 export default {
+    components: {
+        appSidebar: Sidebar
+    },
     data() {
         return {
             brandItems: [],
@@ -192,17 +207,18 @@ export default {
             'selectFeatures',
             'selectPrices',
             'selectGenders',
-            'tableRows'
+            'tableRows',
+            'cartWatches',
+            'cartPrice'
         ])
     },
     methods: {
         getImgUrl(pic) {
-            return require('../assets/images/'+pic)
+            return require('../../assets/images/'+pic)
         },
         selectedBrandOption(brandItem) {
             brandItem.selected = true;
             this.brandItems.push(brandItem)
-            console.log('selectedBrandOptionObj: ', this.brandItems)
         },
         closeBrandItem(brandItem) {
             brandItem.selected = false;
@@ -217,12 +233,10 @@ export default {
             }
 
             this.brandItems = newBrandItems;
-            console.log("newBrandItems: ", this.brandItems)
         },
         selectedColorOption(colorItem) {
             colorItem.selected = true;
             this.colorItems.push(colorItem)
-            console.log('selectedColorOptionObj: ', this.colorItems)
         },
         closeColorItem(colorItem) {
             colorItem.selected = false;
@@ -237,12 +251,10 @@ export default {
             }
 
             this.colorItems = newColorItems;
-            console.log("newColorItems: ", this.colorItems)
         },
         selectedMaterialOption(materialItem) {
             materialItem.selected = true;
             this.materialItems.push(materialItem)
-            console.log('selectedMaterialOptionObj: ', this.materialItems)
         },
         closeMaterialItem(materialItem) {
             materialItem.selected = false;
@@ -257,12 +269,10 @@ export default {
             }
 
             this.materialItems = newMaterialItems;
-            console.log("newMaterialItems: ", this.materialItems)
         },
         selectedFeatureOption(featureItem) {
             featureItem.selected = true;
             this.featureItems.push(featureItem)
-            console.log('selectedFeatureOptionObj: ', this.featureItems)
         },
         closeFeatureItem(featureItem) {
             featureItem.selected = false;
@@ -277,12 +287,10 @@ export default {
             }
 
             this.featureItems = newFeatureItems;
-            console.log("newFeatureItems: ", this.featureItems)
         },
         selectedPriceOption(priceItem) {
             priceItem.selected = true;
             this.priceItems.push(priceItem)
-            console.log('selectedPriceOptionObj: ', this.priceItems)
         },
         closePriceItem(priceItem) {
             priceItem.selected = false;
@@ -297,12 +305,10 @@ export default {
             }
 
             this.priceItems = newPriceItems;
-            console.log("newPriceItems: ", this.priceItems)
         },
         selectedGenderOption(genderItem) {
             genderItem.selected = true;
             this.genderItems.push(genderItem)
-            console.log('selectedGenderOptionObj: ', this.genderItems)
         },
         closeGenderItem(genderItem) {
             genderItem.selected = false;
@@ -317,19 +323,43 @@ export default {
             }
 
             this.genderItems = newGenderItems;
-            console.log("newGenderItems: ", this.genderItems)
+        },
+        switchAdd(tableRow) {
+            tableRow.added = !tableRow.added;
+        },
+        switchButtonAndAddWatch(tableRow) {
+            tableRow.added = !tableRow.added;
+
+            this.cartWatches.push(tableRow);
+            this.$store.commit('setCartWatch', this.cartWatches);
+
+            let newCartPrice = (this.cartPrice + tableRow.listing_price);
+            this.$store.commit('setCartPrice',  newCartPrice);
         }
+        // switchButtonAndAddWatch(tableRow) {
+        //     tableRow.added = !tableRow.added;
+
+        //     let addedTableWatch = tableRow;
+        //     addedTableWatch.quantity = 1;
+        
+        //     this.cartWatches.push(addedTableWatch);
+        //     this.$store.commit('setCartWatch', this.cartWatches);
+
+        //     let newCartPrice = (this.cartPrice + addedTableWatch.listing_price);
+        //     this.$store.commit('setCartPrice',  newCartPrice);
+        // }
     }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import 'src/scss/variables';
 @import 'src/scss/mixins';
 
 .rectangle {
     width: 100%;
     height: 166px;
+    position: relative;
     background-color: $main-color;
     display: flex;
     justify-content: center;
@@ -520,30 +550,24 @@ th {
     font-size: 15px;
 }
 
-.caret-number {
-    position: relative;
-    margin-right: 14px;
+.qty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.caret-quantity {
     color: #926d56;
     font-weight: 600;
     font-size: 15px;
+}
 
-    &:before {
-        font-family: FontAwesome;
-        content: "\f078";
-        position: absolute;
-        left: 20px;
-        top: 11px;
-        font-size: 12px;
-    }
-
-    &:after {
-        font-family: FontAwesome;
-        content: "\f077";
-        position: absolute;
-        left: 20px;
-        top: -6px;
-        font-size: 12px;
-    }
+.carets {
+    display: flex;
+    flex-direction: column;
+    margin: 8px;
+    cursor: pointer;
+    color: #897769;
 }
 
 .info-stock {
@@ -577,12 +601,36 @@ th {
     margin-left: 5px;
     font-size: 16px;
     letter-spacing: 4px;
+    cursor: pointer;
 
     &:after {
         font-family: FontAwesome;
         content: "\f07a";
         position: absolute;
         right: 26px;
+    }
+}
+
+.added-button {
+    position: relative;
+    height: 50px;
+    width: 134px;
+    outline: none;
+    border: none;
+    background-color: #546b95;
+    color: #ffffff;
+    padding-right: 32px;
+    font-weight: 500;
+    margin-left: 5px;
+    font-size: 16px;
+    letter-spacing: 4px;
+    cursor: pointer;
+
+    &:after {
+        font-family: FontAwesome;
+        content: "\f00c";
+        position: absolute;
+        right: 12px;
     }
 }
 
@@ -681,6 +729,17 @@ th {
         }
     }
 
+    .added-button  {
+        height: 32px;
+        width: 88px;
+        font-size: 12px;
+
+        &:after {
+            right: 3px;
+            top: 10px;
+        }
+    }
+
     .out-stock-button {
         font-size: 9px;
 
@@ -775,6 +834,18 @@ th {
         }
     }
 
+    .added-button  {
+        height: 26px;
+        width: 72px;
+        font-size: 10px;
+
+        &:after {
+            right: 0px;
+            top: 8px;
+            font-size: 8px;
+        }
+    }
+
     .out-stock-button {
         font-size: 8px;
 
@@ -865,11 +936,25 @@ th {
         height: 16px;
         width: 44px;
         font-size: 8px;
+        letter-spacing: 0;
 
         &:after {
             font-size: 6px;
             top: 4px;
             right: 10px;
+        }
+    }
+
+    .added-button  {
+        height: 16px;
+        width: 44px;
+        font-size: 8px;
+        letter-spacing: 0;
+
+        &:after {
+            right: 1px;
+            top: 4px;
+            font-size: 6px;
         }
     }
 

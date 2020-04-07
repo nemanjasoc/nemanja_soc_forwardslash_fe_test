@@ -18,13 +18,27 @@
 
                 <div class="header-right-side">
                     <div class="price-box">
-                        <div class="cart">
-                            <div class="cart-badge">0</div>
+                        <div class="cart" @click="isSidebarOpen()">
+                            <div class="cart-badge">{{ cartWatches.length }}</div>
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <div class="preview-boxes">
+                                <div class="preview-box" v-for="cartWatch in cartWatches" :key="cartWatch.id">
+                                    <div class="preview-box-body">
+                                        <img class="preview-box-watch-img" :src="('src/assets/images/' + cartWatch.img_table_watch)">
+                                        <div class="data-watch-wrapper">
+                                            <span class="preview-box-watch-name">{{ cartWatch.brand_name }}</span>
+                                            <span class="preview-box-watch-collection">{{ cartWatch.brand_collection }}</span>
+                                        </div>
+                                        <span class="preview-box-watch-no">{{ cartWatch.item_no }}</span>
+                                        <div class="remove-header-watch" @click="removeCartWatch(cartWatch)">X</div>
+                                    </div>
+                                    <span class="preview-box-footer">Has been successfully added to your cart!</span>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="price-title">Total:
-                            <span class="total-price">$0</span>
+                            <span class="total-price">{{ cartPrice | toCurrency }}</span>
                         </div>
                         
                         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
@@ -51,10 +65,24 @@
                     <i class="fa fa-chevron-down" aria-hidden="true"></i>
                 </li>
                 <li class="cart">
-                    <div class="cart-badge">0</div>
+                    <div class="cart-badge">{{ cartWatches.length }}</div>
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     <div class="price-title">Total:
-                        <span class="total-price">$0</span>
+                        <span class="total-price">{{ cartPrice | toCurrency }}</span>
+                    </div>
+                    <div class="preview-boxes">
+                        <div class="preview-box" v-for="cartWatch in cartWatches" :key="cartWatch.id">
+                            <div class="preview-box-body">
+                                <img class="preview-box-watch-img" :src="('src/assets/images/' + cartWatch.img_table_watch)">
+                                <div class="data-watch-wrapper">
+                                    <span class="preview-box-watch-name">{{ cartWatch.brand_name }}</span>
+                                    <span class="preview-box-watch-collection">{{ cartWatch.brand_collection }}</span>
+                                </div>
+                                <span class="preview-box-watch-no">{{ cartWatch.item_no }}</span>
+                                <div class="remove-header-watch" @click="removeCartWatch(cartWatch)">X</div>
+                            </div>
+                            <span class="preview-box-footer">Has been successfully added to your cart!</span>
+                        </div>
                     </div>
                 </li>
                 <li>
@@ -68,12 +96,55 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { eventBus } from '../../main';
+
 export default {
     data() {
         return {
-            dropdownMenu: false
+            dropdownMenu: false,
+            sidebarToggle: false
+        }
+    },
+    computed: {
+        ...mapGetters([
+            'cartWatches',
+            'cartPrice'
+        ])
+    },
+    methods: {
+        isSidebarOpen() {
+            let isOpen = this.sidebarToggle = !this.sidebarToggle
+            eventBus.$emit('sidebarCheck', isOpen);
+        },
+        removeCartWatch(cartWatch) {
+            let newCartWatches = [];
+
+            for (let i = 0; i < this.cartWatches.length; i++) {
+                let currentCartWatch = this.cartWatches[i];
+
+                if (currentCartWatch.id !== cartWatch.id) {
+                    newCartWatches.push(currentCartWatch)
+                }
+
+            }
+            
+            let newCartPrice = (this.cartPrice - cartWatch.listing_price);
+
+            this.$store.commit('setCartPrice',  newCartPrice);
+            this.$store.commit('setCartWatch', newCartWatches);
         }
     }
+    // watch: {
+    //     cartWatches() {
+    //         let currentCartWatch;
+    //         for (let i = 0; i < this.cartWatches.length; i++) {
+    //             currentCartWatch = this.cartWatches[i];
+    //         }
+    //         let newCartPrice = (this.cartPrice + currentCartWatch.listing_price);
+    //         this.$store.commit('setCartPrice',  newCartPrice);
+    //     }
+    // }
 }
 </script>
 
@@ -85,7 +156,7 @@ header {
 	top: 0;
 	left: 0;
 	right: 0;
-	z-index: 1;
+	z-index: 2;
 }
 
 .header-wrapper {
@@ -178,6 +249,12 @@ header {
     cursor: pointer;
     position: relative;
     color: #a67f66;
+
+    &:hover {
+        .preview-boxes {
+            display: block;
+        }
+    }
 }
 
 .fa-shopping-cart {
@@ -212,7 +289,7 @@ header {
 .total-price {
     padding-right: 30px;
     color: #a9836b;
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 600;
     position: absolute;
     top: 14px;
@@ -238,6 +315,90 @@ header {
 
 .dropdown-content {
     display: none;
+}
+
+.preview-boxes {
+    display: none;    
+    position: absolute;
+    top: 38px;
+    right: 0;
+}
+
+.preview-box {
+    border: 1px solid #dbccb9;
+    width: 300px;
+    height: 150px;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+
+    &:after {
+        font-family: FontAwesome;
+        content: "\F0D8";
+        position: absolute;
+        right: 20px;
+        top: -21px;
+        font-size: 30px;
+        color: #ffffff;
+    }
+
+}
+
+.preview-box-body {
+    width: 100%;
+    height: 110px;
+    display: flex;
+
+    img {
+        width: 35px;
+        height: 60px;
+    }
+}
+
+.preview-box-watch-img {
+    padding: 30px 0 0 10px;
+}
+
+.data-watch-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    width: 130px;
+    margin-left: 10px;
+}
+
+.preview-box-watch-name {
+    color: #314061;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.preview-box-watch-collection {
+    font-size: 12px;
+}
+
+.preview-box-watch-no {
+    display: flex;
+    font-size: 12px;
+    color: #2e4162;
+    padding: 38px 5px 0 18px;
+}
+
+.remove-header-watch {
+    padding-right: 12px;
+    padding-top: 8px;
+    font-size: 12px;
+}
+
+.preview-box-footer {
+    width: 100%;
+    height: 40px;
+    border-top: 1px solid #dbccb9;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aab6c6;
 }
 
 @media only screen and (max-width: 992px) {

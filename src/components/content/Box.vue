@@ -1,7 +1,7 @@
 <template>
     <div class="box-container">
-        <div class="box-row">
-            <img class="box-img" src="../assets/images/box-runner.png" alt="box-runner">
+        <section class="box-row">
+            <img class="box-img" src="../../assets/images/box-runner.png" alt="box-runner">
             <div class="empty-box">
                 <div class="empty-box-runner-inner">
                     <div class="inner-content">
@@ -16,9 +16,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
         
-        <div class="box-row">
+        <section class="box-row">
             <div class="empty-box">
                 <div class="empty-box-watch-inner">
                     <div class="inner-content">
@@ -33,15 +33,15 @@
                     </div>
                 </div>
             </div>
-            <img class="box-img" src="../assets/images/box-watch.png" alt="box-watch">
-        </div>
+            <img class="box-img" src="../../assets/images/box-watch.png" alt="box-watch">
+        </section>
     </div> 
 </template>
 
 <script>
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import 'src/scss/mixins';
 @import 'src/scss/variables';
 

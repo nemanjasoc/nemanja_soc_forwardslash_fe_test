@@ -130,12 +130,13 @@ const state = {
             brand_name: 'ALFRED SUNG',
             brand_collection: 'Slim Collection Series 5',
             item_no: 'AS7104SL-1A',
-            listing_price: '$3,700.00',
-            wholesale_price: '$3,700.00',
-            caret_number: 0,
+            listing_price: 3700,
+            wholesale_price: 3700,
+            quantity: 0,
             low_on_stock: true,
             isBrown: false,
-            showMore: false
+            showMore: false,
+            added: false
         },
         {
             id: 2,
@@ -143,11 +144,12 @@ const state = {
             brand_name: 'GARMIN',
             brand_collection: 'Classic Collection',
             item_no: 'AW2304WE-9Q',
-            listing_price: '$4,200.00',
-            wholesale_price: '$4,000.00',
-            caret_number: 4,
+            listing_price: 4200,
+            wholesale_price: 4000,
+            quantity: 0,
             isBrown: false,
-            showMore: false
+            showMore: false,
+            added: false
         },
         {
             id: 3,
@@ -155,11 +157,12 @@ const state = {
             brand_name: 'ALFRED SUNG',
             brand_collection: 'Slim Collection Series 5',
             item_no: 'AS7104SL-1A',
-            listing_price: '$3,700.00',
-            wholesale_price: '$3,700.00',
-            caret_number: 0,
+            listing_price: 3700,
+            wholesale_price: 3700,
+            quantity: 0,
             isBrown: false,
-            showMore: false
+            showMore: false,
+            added: false
         },
         {
             id: 4,
@@ -167,11 +170,12 @@ const state = {
             brand_name: 'WRANGLER',
             brand_collection: 'Western Collection',
             item_no: 'AS7494SL-8R',
-            listing_price: '$5,600.00',
-            wholesale_price: '$5,200.00',
-            caret_number: 0,
+            listing_price: 5600,
+            wholesale_price: 5200,
+            quantity: 0,
             isBrown: false,
-            showMore: false
+            showMore: false,
+            added: false
         },
         {
             id: 5,
@@ -179,12 +183,13 @@ const state = {
             brand_name: 'ALFRED SUNG',
             brand_collection: 'Slim Collection Series 5',
             item_no: 'AS7104SL-1A',
-            listing_price: '$3,700.00',
-            wholesale_price: '$3,700.00',
-            caret_number: 0,
+            listing_price: 3700,
+            wholesale_price: 3700,
+            quantity: 0,
             out_of_stock: true,
             isBrown: false,
-            showMore: false
+            showMore: false,
+            added: false
         },
         {
             id: 6,
@@ -192,11 +197,12 @@ const state = {
             brand_name: 'GARMIN',
             brand_collection: 'Classic Collection Series 6',
             item_no: 'AS2E0G8E-2U',
-            listing_price: '$2,100.00',
-            wholesale_price: '$2,000.00',
-            caret_number: 0,
+            listing_price: 2100,
+            wholesale_price: 2000,
+            quantity: 0,
             isBrown: false,
-            showMore: false
+            showMore: false,
+            added: false
         }
     ]
 }

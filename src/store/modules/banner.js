@@ -33,10 +33,18 @@ const state = {
             img_watch: 'slider-watch.png'
         }
     ],
-    thumbnails: [
+    thumbnailImages: [
         {
-            id: 1,
+            id: '1',
+            img_thumbnail_watch: 'table-watch1.png'
+        },
+        {
+            id: '2',
             img_thumbnail_watch: 'thumbnail-watch.png'
+        },
+        {
+            id: '3',
+            img_thumbnail_watch: 'table-watch2.png'
         }
     ]
 }
@@ -45,8 +53,8 @@ const getters = {
     slides: function (state) {
         return state.slides;
     },    
-    thumbnails: function (state) {
-        return state.thumbnails;
+    thumbnailImages: function (state) {
+        return state.thumbnailImages;
     }
 }
 
