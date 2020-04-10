@@ -44,7 +44,7 @@ const state = {
         },
         {
             id: '3',
-            img_thumbnail_watch: 'table-watch2.png'
+            img_thumbnail_watch: 'table-watch3.png'
         }
     ]
 }

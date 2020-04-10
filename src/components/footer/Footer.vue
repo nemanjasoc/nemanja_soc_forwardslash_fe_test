@@ -4,10 +4,12 @@
         <div class="footer-container">
             <div class="footer-info">
                 <h1>LINKS</h1>
-                <h4 class="company-title">COMPANY</h4>
-                <h4 class="catalogs-title">CATALOGS</h4>
-                <h4>Find a dealer</h4>
-                <h4>Login / Register</h4>
+                <ul>
+                    <li class="company-title">COMPANY</li>
+                    <li class="catalogs-title">CATALOGS</li>
+                    <li>Find a dealer</li>
+                    <li>Login / Register</li>
+                </ul>
             </div>
 
             <div class="footer-info">
@@ -40,7 +42,6 @@
 
 footer {
     width: 100%;
-    height: 486px;
     background-color: $main-color;
     display: flex;
     flex-direction: column;
@@ -64,6 +65,7 @@ footer {
     width: 33.33%;
     text-align: center;
     position: relative;
+    line-height: 35px;
     
     &:after {
         content: '';
@@ -87,11 +89,27 @@ footer {
         font-size: 30px;
         letter-spacing: 10px;
     }
-}
 
-h4 {
-    color: #304061;
-    font-weight: 500;
+    ul {
+        margin: 0;
+
+        li {
+            color: #304061;
+            font-weight: 500;
+            transition: all 0.2s;
+            -webkit-transition: all 0.2s;
+            display: block;
+            
+            &:hover {
+                color: #ab876f;
+            }
+        }
+    }
+
+    h4 {
+        color: #304061;
+        font-weight: 500;
+    }
 }
 
 .company-title {
@@ -101,7 +119,6 @@ h4 {
 }
 
 .catalogs-title {
-    color: #ab876f;
     font-size: 19px;
     letter-spacing: 2px;
 }

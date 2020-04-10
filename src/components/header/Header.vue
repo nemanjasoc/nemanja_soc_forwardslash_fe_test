@@ -22,7 +22,7 @@
                             <div class="cart-badge">{{ cartWatches.length }}</div>
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                             <div class="preview-boxes">
-                                <div class="preview-box" v-for="cartWatch in cartWatches" :key="cartWatch.id">
+                                <div class="preview-box" v-for="(cartWatch, index) in cartWatches" :key="cartWatch.id">
                                     <div class="preview-box-body">
                                         <img class="preview-box-watch-img" :src="('src/assets/images/' + cartWatch.img_table_watch)">
                                         <div class="data-watch-wrapper">
@@ -32,7 +32,7 @@
                                         <span class="preview-box-watch-no">{{ cartWatch.item_no }}</span>
                                         <div class="remove-header-watch" @click="removeCartWatch(cartWatch)">X</div>
                                     </div>
-                                    <span class="preview-box-footer">Has been successfully added to your cart!</span>
+                                    <span class="preview-box-footer" v-if="index == cartWatches.length - 1">Has been successfully added to your cart!</span>
                                 </div>
                             </div>
                         </div>
@@ -64,14 +64,14 @@
                     <span class="title-info">Company info</span>
                     <i class="fa fa-chevron-down" aria-hidden="true"></i>
                 </li>
-                <li class="cart">
+                <li class="cart" @click="isSidebarOpen()">
                     <div class="cart-badge">{{ cartWatches.length }}</div>
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     <div class="price-title">Total:
                         <span class="total-price">{{ cartPrice | toCurrency }}</span>
                     </div>
                     <div class="preview-boxes">
-                        <div class="preview-box" v-for="cartWatch in cartWatches" :key="cartWatch.id">
+                        <div class="preview-box" v-for="(cartWatch, index) in cartWatches" :key="cartWatch.id">
                             <div class="preview-box-body">
                                 <img class="preview-box-watch-img" :src="('src/assets/images/' + cartWatch.img_table_watch)">
                                 <div class="data-watch-wrapper">
@@ -81,7 +81,7 @@
                                 <span class="preview-box-watch-no">{{ cartWatch.item_no }}</span>
                                 <div class="remove-header-watch" @click="removeCartWatch(cartWatch)">X</div>
                             </div>
-                            <span class="preview-box-footer">Has been successfully added to your cart!</span>
+                            <span class="preview-box-footer" v-if="index == cartWatches.length - 1">Has been successfully added to your cart!</span>
                         </div>
                     </div>
                 </li>
@@ -118,6 +118,7 @@ export default {
             eventBus.$emit('sidebarCheck', isOpen);
         },
         removeCartWatch(cartWatch) {
+            cartWatch.isAddButtonDisabled = false;
             let newCartWatches = [];
 
             for (let i = 0; i < this.cartWatches.length; i++) {
@@ -128,23 +129,21 @@ export default {
                 }
 
             }
-            
-            let newCartPrice = (this.cartPrice - cartWatch.listing_price);
 
-            this.$store.commit('setCartPrice',  newCartPrice);
+            let newCartPrice;
+
+            if (cartWatch.quantity === 1) {
+                newCartPrice = (this.cartPrice - cartWatch.listing_price);
+                cartWatch.quantity = 0;
+            } else if (cartWatch.quantity > 1) {
+                newCartPrice = (this.cartPrice - (cartWatch.listing_price * cartWatch.quantity));
+                cartWatch.quantity = 0;
+            }
+
+            this.$store.commit('setCartPrice', newCartPrice);
             this.$store.commit('setCartWatch', newCartWatches);
         }
     }
-    // watch: {
-    //     cartWatches() {
-    //         let currentCartWatch;
-    //         for (let i = 0; i < this.cartWatches.length; i++) {
-    //             currentCartWatch = this.cartWatches[i];
-    //         }
-    //         let newCartPrice = (this.cartPrice + currentCartWatch.listing_price);
-    //         this.$store.commit('setCartPrice',  newCartPrice);
-    //     }
-    // }
 }
 </script>
 
@@ -252,7 +251,7 @@ header {
 
     &:hover {
         .preview-boxes {
-            display: block;
+            opacity: 1;
         }
     }
 }
@@ -318,7 +317,9 @@ header {
 }
 
 .preview-boxes {
-    display: none;    
+    opacity: 0;
+    transition: all 0.4s;
+    -webkit-transition: all 0.4s;   
     position: absolute;
     top: 38px;
     right: 0;
@@ -327,19 +328,17 @@ header {
 .preview-box {
     border: 1px solid #dbccb9;
     width: 300px;
-    height: 150px;
     background-color: #ffffff;
-    margin-bottom: 10px;
 
-    &:after {
-        font-family: FontAwesome;
-        content: "\F0D8";
-        position: absolute;
-        right: 20px;
-        top: -21px;
-        font-size: 30px;
-        color: #ffffff;
-    }
+    // &:after {
+    //     font-family: FontAwesome;
+    //     content: "\F0D8";
+    //     position: absolute;
+    //     right: 20px;
+    //     top: -21px;
+    //     font-size: 30px;
+    //     color: #dbccb9;
+    // }
 
 }
 
@@ -391,13 +390,13 @@ header {
 }
 
 .preview-box-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 40px;
     border-top: 1px solid #dbccb9;
     font-size: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: #aab6c6;
 }
 
@@ -489,7 +488,7 @@ header {
         margin-top: 0;
 
         li {
-            padding: 10px;
+            padding: 15px;
             position: relative;
         }
 
@@ -511,8 +510,8 @@ header {
 
         .cart-badge {
             position: absolute;
-            top: 2px;
-            left: 19px;
+            top: 7px;
+            left: 27px;
         }
 
         .price-title {
@@ -524,7 +523,7 @@ header {
         .fa-user-circle-o {
             position: absolute;
             left: -12px;
-            bottom: 10px;
+            bottom: 13px;
         }
         
     }

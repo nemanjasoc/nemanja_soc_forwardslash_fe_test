@@ -136,7 +136,9 @@ const state = {
             low_on_stock: true,
             isBrown: false,
             showMore: false,
-            added: false
+            added: false,
+            isDecreaseQuantityDisabled: true,
+            isAddButtonDisabled: false
         },
         {
             id: 2,
@@ -149,7 +151,9 @@ const state = {
             quantity: 0,
             isBrown: false,
             showMore: false,
-            added: false
+            added: false,
+            isDecreaseQuantityDisabled: true,
+            isAddButtonDisabled: false
         },
         {
             id: 3,
@@ -162,7 +166,9 @@ const state = {
             quantity: 0,
             isBrown: false,
             showMore: false,
-            added: false
+            added: false,
+            isDecreaseQuantityDisabled: true,
+            isAddButtonDisabled: false
         },
         {
             id: 4,
@@ -175,7 +181,9 @@ const state = {
             quantity: 0,
             isBrown: false,
             showMore: false,
-            added: false
+            added: false,
+            isDecreaseQuantityDisabled: true,
+            isAddButtonDisabled: false
         },
         {
             id: 5,
@@ -189,7 +197,9 @@ const state = {
             out_of_stock: true,
             isBrown: false,
             showMore: false,
-            added: false
+            added: false,
+            isDecreaseQuantityDisabled: true,
+            isAddButtonDisabled: false
         },
         {
             id: 6,
@@ -202,7 +212,9 @@ const state = {
             quantity: 0,
             isBrown: false,
             showMore: false,
-            added: false
+            added: false,
+            isDecreaseQuantityDisabled: true,
+            isAddButtonDisabled: false
         }
     ]
 }

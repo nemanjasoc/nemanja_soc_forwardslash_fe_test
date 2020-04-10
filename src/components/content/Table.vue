@@ -9,38 +9,50 @@
 
             <div class="select-wrapper">
                 <select v-model="brandItem" @change="selectedBrandOption(brandItem)">
-                    <option value="">Brands:</option>
-                    <option v-for="selectedBrand in selectBrands" :value="selectedBrand" :key="selectedBrand.value">
+                    <option value="">Brands</option>
+                    <option v-for="selectedBrand in selectBrands" 
+                        :value="selectedBrand" 
+                        :key="selectedBrand.value">
                         <label>{{ selectedBrand.option }}</label>
                     </option>
                 </select>        
                 <select v-model="colorItem" @change="selectedColorOption(colorItem)">
                     <option value="">Colors:</option>
-                    <option v-for="selectedColor in selectColors" :value="selectedColor" :key="selectedColor.value">
+                    <option v-for="selectedColor in selectColors" 
+                        :value="selectedColor" 
+                        :key="selectedColor.value">
                         <label>{{ selectedColor.option }}</label>
                     </option>
                 </select>      
                 <select v-model="materialItem" @change="selectedMaterialOption(materialItem)">
                     <option value="">Materials:</option>
-                    <option v-for="selectedMaterial in selectMaterials" :value="selectedMaterial" :key="selectedMaterial.value">
+                    <option v-for="selectedMaterial in selectMaterials" 
+                        :value="selectedMaterial" 
+                        :key="selectedMaterial.value">
                         <label>{{ selectedMaterial.option }}</label>
                     </option>
                 </select>       
                 <select v-model="featureItem" @change="selectedFeatureOption(featureItem)">
                     <option value="">Features:</option>
-                    <option v-for="selectedFeature in selectFeatures" :value="selectedFeature" :key="selectedFeature.value">
+                    <option v-for="selectedFeature in selectFeatures" 
+                        :value="selectedFeature" 
+                        :key="selectedFeature.value">
                         <label>{{ selectedFeature.option }}</label>
                     </option>
                 </select>
                 <select v-model="priceItem" @change="selectedPriceOption(priceItem)">
                     <option value="">Price:</option>
-                    <option v-for="selectedPrice in selectPrices" :value="selectedPrice" :key="selectedPrice.value">
+                    <option v-for="selectedPrice in selectPrices" 
+                        :value="selectedPrice" 
+                        :key="selectedPrice.value">
                         <label>{{ selectedPrice.option }}</label>
                     </option>
                 </select>
                 <select v-model="genderItem" @change="selectedGenderOption(genderItem)">
                     <option value="">Gender:</option>
-                    <option v-for="selectedGender in selectGenders" :value="selectedGender" :key="selectedGender.value">
+                    <option v-for="selectedGender in selectGenders" 
+                        :value="selectedGender" 
+                        :key="selectedGender.value">
                         <label>{{ selectedGender.option }}</label>
                     </option>
                 </select>
@@ -85,24 +97,37 @@
 
         <div class="table-wrapper">
             <table>
-                <tr>
-                    <th></th>
-                    <th>Image</th>
-                    <th class="third-col">Brand</th>
-                    <th>Item No.</th>
-                    <th>Listing</th>
-                    <th>Wholesale</th>
-                    <th>QTY</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tbody v-for="tableRow in tableRows" :key="tableRow.id" @click="tableRow.showMore = !tableRow.showMore" :class="{ inactive: !tableRow.showMore }">
-                    <tr :class="{ inactive: !tableRow.showMore }">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Image</th>
+                        <th class="third-col">Brand</th>
+                        <th>Item No.</th>
+                        <th>Listing</th>
+                        <th>Wholesale</th>
+                        <th>QTY</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody v-for="tableRow in tableRows" 
+                    :key="tableRow.id" 
+                    @click="tableRow.showMore = !tableRow.showMore" 
+                    :class="{ inactive: !tableRow.showMore }">
+                    <tr>
                         <td>
-                            <i @click="tableRow.isBrown = !tableRow.isBrown" class="fa fa-star-o" aria-hidden="true" :class="{ inactive: tableRow.isBrown }"></i>
-                            <i @click="tableRow.isBrown = !tableRow.isBrown" class="fa fa-star" aria-hidden="true" :class="{ inactive: !tableRow.isBrown }"></i>
+                            <i class="fa fa-star-o" aria-hidden="true" 
+                                @click="tableRow.isBrown = !tableRow.isBrown" 
+                                :class="{ inactive: tableRow.isBrown }">
+                            </i>
+                            <i class="fa fa-star" aria-hidden="true" 
+                                @click="tableRow.isBrown = !tableRow.isBrown" 
+                                :class="{ inactive: !tableRow.isBrown }">
+                            </i>
                         </td>
-                        <td><img :src="getImgUrl(tableRow.img_table_watch)" :alt="tableRow.img_table_watch"></td>
+                        <td>
+                            <img :src="getImgUrl(tableRow.img_table_watch)" :alt="tableRow.img_table_watch">
+                        </td>
                         <td class="third-col">
                             <div class="brand-name">{{ tableRow.brand_name }}</div>
                             <span class="brand-collection">{{ tableRow.brand_collection }}</span>
@@ -124,11 +149,12 @@
                                 <i class="fa fa-info-circle" aria-hidden="true"></i>
                                 <span class="stock-title">Low on stock</span>
                             </div>
-                            <button class="add-button" 
+                            <button 
+                                class="add-button" 
                                 @click="switchButtonAndAddWatch(tableRow)" 
-                                v-if="!tableRow.out_of_stock && !tableRow.added">
-                                ADD</button>
-                            <button class="added-button" @click="switchAdd(tableRow)" v-if="!tableRow.out_of_stock && tableRow.added">ADDED</button>
+                                v-if="!tableRow.out_of_stock"
+                                :class="{ disabled: tableRow.isAddButtonDisabled }">
+                            </button>
                             <button class="out-stock-button" v-if="tableRow.out_of_stock">
                                 <img src="../../assets/images/empty-cart.png" alt="table-watch4">
                                 OUT OF STOCK
@@ -186,17 +212,17 @@ export default {
     data() {
         return {
             brandItems: [],
-            brandItem: {},
+            brandItem: '',
             colorItems: [],
-            colorItem: {},
+            colorItem: '',
             materialItems: [],
-            materialItem: {},
+            materialItem: '',
             featureItems: [],
-            featureItem: {},
+            featureItem: '',
             priceItems: [],
-            priceItem: {},
+            priceItem: '',
             genderItems: [],
-            genderItem: {}
+            genderItem: ''
         }
     },
     computed: {
@@ -324,30 +350,22 @@ export default {
 
             this.genderItems = newGenderItems;
         },
-        switchAdd(tableRow) {
-            tableRow.added = !tableRow.added;
-        },
         switchButtonAndAddWatch(tableRow) {
             tableRow.added = !tableRow.added;
 
-            this.cartWatches.push(tableRow);
+            let addedTableWatch = tableRow;
+            addedTableWatch.quantity = 1;
+            
+            if (addedTableWatch.quantity === 1) {
+                addedTableWatch.isAddButtonDisabled = true;
+            }
+            
+            this.cartWatches.push(addedTableWatch);
             this.$store.commit('setCartWatch', this.cartWatches);
-
-            let newCartPrice = (this.cartPrice + tableRow.listing_price);
+            
+            let newCartPrice = (this.cartPrice + addedTableWatch.listing_price);
             this.$store.commit('setCartPrice',  newCartPrice);
         }
-        // switchButtonAndAddWatch(tableRow) {
-        //     tableRow.added = !tableRow.added;
-
-        //     let addedTableWatch = tableRow;
-        //     addedTableWatch.quantity = 1;
-        
-        //     this.cartWatches.push(addedTableWatch);
-        //     this.$store.commit('setCartWatch', this.cartWatches);
-
-        //     let newCartPrice = (this.cartPrice + addedTableWatch.listing_price);
-        //     this.$store.commit('setCartPrice',  newCartPrice);
-        // }
     }
 }
 </script>
@@ -592,16 +610,24 @@ th {
     position: relative;
     height: 50px;
     width: 134px;
+    display: flex;
+    align-items: center;
     outline: none;
     border: none;
     background-color: $base-blue;
     color: #ffffff;
-    padding-right: 32px;
     font-weight: 500;
     margin-left: 5px;
     font-size: 16px;
     letter-spacing: 4px;
     cursor: pointer;
+
+    &:before {
+        font-family: FontAwesome;
+        content: "ADD";
+        position: absolute;
+        left: 26px;
+    }
 
     &:after {
         font-family: FontAwesome;
@@ -611,20 +637,29 @@ th {
     }
 }
 
-.added-button {
+.add-button.disabled {
     position: relative;
     height: 50px;
     width: 134px;
+    display: flex;
+    align-items: center;
     outline: none;
     border: none;
-    background-color: #546b95;
+    background-color: $base-blue;
     color: #ffffff;
-    padding-right: 32px;
     font-weight: 500;
     margin-left: 5px;
     font-size: 16px;
     letter-spacing: 4px;
-    cursor: pointer;
+    opacity: 0.5;
+    pointer-events: none;
+
+    &:before {
+        font-family: FontAwesome;
+        content: "ADDED";
+        position: absolute;
+        left: 12px;
+    }
 
     &:after {
         font-family: FontAwesome;
@@ -648,9 +683,11 @@ th {
     }
 }
 
-.fa-chevron-down {
-    color: #926d56;
-    font-size: 12px;
+td {
+    .fa-chevron-down {
+        color: #926d56;
+        font-size: 12px;
+    }
 }
 
 @media only screen and (max-width: 992px) {
@@ -749,9 +786,12 @@ th {
         }
     }
 
-    .fa-chevron-down {
-        font-size: 11px;
+    td {
+        .fa-chevron-down {
+            font-size: 11px;
+        }
     }
+
 }
 
 @media only screen and (max-width: 768px) {
@@ -855,9 +895,12 @@ th {
         }
     }
 
-    .fa-chevron-down {
-        font-size: 9px;
+    td {
+        .fa-chevron-down {
+            font-size: 9px;
+        }
     }
+
 }
 
 @media only screen and (max-width: 480px) {
@@ -965,8 +1008,11 @@ th {
         }
     }
 
-    .fa-chevron-down {
-        font-size: 6px;
+    td {
+        .fa-chevron-down {
+            font-size: 6px;
+        }
     }
+
 }
 </style>

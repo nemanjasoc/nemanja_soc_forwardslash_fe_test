@@ -2,7 +2,7 @@
     <div class="banner-container">
         <carousel paginationPosition="bottom" 
             :perPageCustom="[[200, 1]]" 
-            :paginationPadding=6 
+            :paginationPadding=6
             paginationColor="#ddccb8" 
             paginationActiveColor="#a0765b">
             <slide v-for="slide in slides" :key="slide.id">
@@ -114,7 +114,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import 'src/scss/variables';
 @import 'src/scss/mixins';
 
@@ -246,6 +246,11 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    img {
+        width: 43px;
+        height: 70px;
+    }
 }
 
 .slide-watch {
@@ -369,6 +374,10 @@ export default {
     .thumbnail-watch-img1 {
         width: 32px;
         height: 52px;
+    }
+
+    .VueCarousel-pagination[data-v-438fd353] {
+        left: 8px;
     }
 }
 </style>
