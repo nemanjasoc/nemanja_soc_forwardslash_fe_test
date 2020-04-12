@@ -14,15 +14,17 @@
 
             <div class="footer-info">
                 <h1>DEV TEST</h1>
-                <h4 class="dev-title">Dev Test</h4>
+                <span class="dev-title">Dev Test</span>
                 <span class="address-title">1421 38</span>
                 <span class="address-second-title">Brooklyn,NY</span>
-                <h4>11245-5647 USA</h4>
+                <span class="address-third-title">11245-5647 USA</span>
             </div>
 
             <div class="footer-info">
                 <h1>NEWSLETTER</h1>
-                <button class="e-mail">EMAIL ADDRESS</button>
+                <div class="e-mail">
+                    <button class="e-mail-button">EMAIL ADDRESS</button>
+                </div>
             </div>
         </div>
 
@@ -54,6 +56,7 @@ footer {
     background-color: #ddccb8;
     margin: 0px auto auto auto;
     width: 100%;
+    margin-bottom: 80px;
 }
 
 .footer-container {
@@ -65,7 +68,7 @@ footer {
     width: 33.33%;
     text-align: center;
     position: relative;
-    line-height: 35px;
+    line-height: 30px;
     
     &:after {
         content: '';
@@ -84,31 +87,27 @@ footer {
     }
 
     h1 {
-        color: #304061;
+        color: $footer-text-color;
         font-family: "Sample";
         font-size: 30px;
         letter-spacing: 10px;
     }
 
     ul {
-        margin: 0;
+        line-height: 35px;
 
         li {
-            color: #304061;
+            color: $footer-text-color;
             font-weight: 500;
             transition: all 0.2s;
             -webkit-transition: all 0.2s;
             display: block;
+            font-size: 19px;
             
             &:hover {
                 color: #ab876f;
             }
         }
-    }
-
-    h4 {
-        color: #304061;
-        font-weight: 500;
     }
 }
 
@@ -124,12 +123,15 @@ footer {
 }
 
 .dev-title {
+    display: flex;
     margin-top: 65px;
+    justify-content: center;
+    color: $footer-text-color;
 }
 
 .address-title {
     position: relative;
-    color: #304061;
+    color: $footer-text-color;
 
     &:after {
         content: 'th';
@@ -142,11 +144,24 @@ footer {
 
 .address-second-title {
     margin-left: 9px;
-    color: #304061;
+    color: $footer-text-color;
+    letter-spacing: 1px;
+}
+
+.address-third-title {
+    display: flex;
+    justify-content: center;
+    color: $footer-text-color;
     letter-spacing: 1px;
 }
 
 .e-mail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.e-mail-button {
     max-width: 328px;
     width: 100%;
     height: 75px;
@@ -181,9 +196,8 @@ footer {
 }
 
 .footer-text {
-    margin-top: 90px;
-    color: #304061;
-    margin: auto auto 20px auto;
+    color: $footer-text-color;
+    margin: 30px auto 40px auto;
 }
 
 .footer-title {
@@ -200,8 +214,14 @@ footer {
             font-size: 26px;
             letter-spacing: 8px;
         }
-    }
 
+        ul {
+            li {
+                font-size: 16px;
+            }
+        }
+    }
+    
     .company-title {
         font-size: 17px;
         letter-spacing: 2px;
@@ -211,7 +231,7 @@ footer {
         font-size: 17px;
     }
 
-    .e-mail {
+    .e-mail-button {
         max-width: 284px;
         height: 65px;
 
@@ -220,19 +240,19 @@ footer {
             font-size: 19px;
         }
     }
-
-    .footer-text {
-        margin-top: 90px;
-        color: #304061;
-        margin: auto auto 20px auto;
-    }
 }
 
 @media only screen and (max-width: 992px) {
     .footer-info {
         h1 {
-            font-size: 20px;
+            font-size: 22px;
             letter-spacing: 6px;
+        }
+
+        ul {
+            li {
+                font-size: 16px;
+            }
         }
     }
 
@@ -245,7 +265,7 @@ footer {
         font-size: 15px;
     }
 
-    .e-mail {
+    .e-mail-button {
         max-width: 240px;
         height: 55px;
 
@@ -266,12 +286,18 @@ footer {
         width: 100%;
 
         h1 {
-            font-size: 18px;
+            font-size: 17px;
             letter-spacing: 4px;
         }
 
         &:after {
             display: none;
+        }
+
+        ul {
+            li {
+                font-size: 15px;
+            }
         }
     }
 
@@ -288,7 +314,7 @@ footer {
         margin-top: 10px;
     }
 
-    .e-mail {
+    .e-mail-button {
         margin-top: 0px;
         max-width: 228px;
         height: 36px;
@@ -305,10 +331,7 @@ footer {
         margin-top: 5px;
     }
 
-    .footer-title {
-        font-size: 13px;
-    }
-
+    .footer-title,
     .fa-copyright {
         font-size: 13px;
     }

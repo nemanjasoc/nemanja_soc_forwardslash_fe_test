@@ -23,10 +23,16 @@
 
         <div class="slider-boxes">
             <div class="left-box">
-                <i class="fa fa-long-arrow-left" aria-hidden="true" @mouseover="showPreviousWatchThumbnailImage" @mouseleave="hidePreviousWatchThumbnailImage"></i>
+                <i class="fa fa-long-arrow-left" aria-hidden="true" 
+                    @mouseover="showPreviousWatchThumbnailImage" 
+                    @mouseleave="hidePreviousWatchThumbnailImage">
+                </i>
             </div>
             <div class="right-box">
-                <i class="fa fa-long-arrow-right" aria-hidden="true" @mouseover="showNextWatchThumbnailImage" @mouseleave="hideNextWatchThumbnailImage"></i>
+                <i class="fa fa-long-arrow-right" aria-hidden="true" 
+                    @mouseover="showNextWatchThumbnailImage" 
+                    @mouseleave="hideNextWatchThumbnailImage">
+                </i>
             </div>     
             <div class="watch-thumbnail">
                 <img class="thumbnail-watch-img" :src="('src/assets/images/' + watchThumbnailImage)" alt="thumbnail-img">
@@ -80,35 +86,13 @@ export default {
             this.watchThumbnailImage = newImage.img_thumbnail_watch;
         },
         showNextWatchThumbnailImage() {
-            var newImage = '';
-            
-            for (let i = 0; i < this.thumbnailImages.length; i++) {
-                let currentThumbnailImage = this.thumbnailImages[i];
-                let nextThumbnailImage = this.thumbnailImages[i+1];
-               
-                if (currentThumbnailImage.img_thumbnail_watch.indexOf(this.watchThumbnailImage) != -1) {
-                    newImage = nextThumbnailImage;
-                }
-            }
-
-            this.watchThumbnailImage = newImage.img_thumbnail_watch;
+            this.hidePreviousWatchThumbnailImage();
         },
         hideNextWatchThumbnailImage() {
-            var newImage = '';
-            
-            for (let i = 0; i < this.thumbnailImages.length; i++) {
-                let currentThumbnailImage = this.thumbnailImages[i];
-                let prevThumbnailImage = this.thumbnailImages[i-1];
-               
-                if (currentThumbnailImage.img_thumbnail_watch.indexOf(this.watchThumbnailImage) != -1) {
-                    newImage = prevThumbnailImage;
-                }
-            }
-
-            this.watchThumbnailImage = newImage.img_thumbnail_watch;
+            this.showPreviousWatchThumbnailImage();
         },
         getImgUrl(pic) {
-            return require('../../assets/images/'+pic)
+            return require('../../assets/images/'+pic);
         }
     }
 }
@@ -177,7 +161,7 @@ export default {
 }
 
 .slide-title {
-    color: #304061;
+    color: $footer-text-color;
     font-size: 82px;
     margin: 31px 0 90px 0;
     font-family: "Sample";
@@ -186,7 +170,7 @@ export default {
 }
 
 .slide-button {
-    color: #304061;
+    color: $footer-text-color;
     max-width: 238px;
     width: 100%;
     height: 65px;
@@ -204,6 +188,11 @@ export default {
 
 .fa-long-arrow-right {
     color: #a0765b;
+    cursor: pointer;
+}
+
+.fa-long-arrow-left  {
+    cursor: pointer;
 }
 
 .title-explore {
@@ -220,32 +209,20 @@ export default {
 }
 
 .left-box {
-    width: 114px;
-    height: 114px;
     background-color: #ddccb8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: #a0765b;
+    @include banner-boxes;
 }
 
 .right-box {
-    width: 114px;
-    height: 114px;
     background-color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #b18e78
+    color: #b18e78;
+    @include banner-boxes;
 }
 
 .watch-thumbnail {
-    width: 114px;
-    height: 114px;
+    @include banner-boxes;
     background-color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
     img {
         width: 43px;

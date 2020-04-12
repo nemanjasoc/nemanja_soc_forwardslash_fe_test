@@ -83,22 +83,21 @@ export default {
         },
         increaseWatchNumberAndSum(cartWatch) {
             let newCartWatches = [];
-            let increasedCartWatchQuantity = cartWatch;
-            increasedCartWatchQuantity.quantity = cartWatch.quantity + 1;
+            cartWatch.quantity = cartWatch.quantity + 1;
 
             for (let i = 0; i < this.cartWatches.length; i++) {
                 let currentCartWatch = this.cartWatches[i];
 
-                if (currentCartWatch.id === increasedCartWatchQuantity.id) {
-                    newCartWatches.push(increasedCartWatchQuantity)
+                if (currentCartWatch.id === cartWatch.id) {
+                    newCartWatches.push(cartWatch)
                 } else {
                     newCartWatches.push(currentCartWatch)
                 }
 
             }
 
-            if (increasedCartWatchQuantity.quantity > 1) {
-                increasedCartWatchQuantity.isDecreaseQuantityDisabled= false;
+            if (cartWatch.quantity > 1) {
+                cartWatch.isDecreaseQuantityDisabled= false;
             }
 
             let newCartPrice = (this.cartPrice + cartWatch.listing_price);
@@ -108,28 +107,27 @@ export default {
         },
         decreaseWatchNumberAndSum(cartWatch) {
             let newCartWatches = [];
-            let decreasedCartWatchQuantity = cartWatch;
             
-            if (decreasedCartWatchQuantity.quantity > 0) {
-                decreasedCartWatchQuantity.quantity = cartWatch.quantity - 1;
+            if (cartWatch.quantity > 0) {
+                cartWatch.quantity = cartWatch.quantity - 1;
             }
 
             for (let i = 0; i < this.cartWatches.length; i++) {
                 let currentCartWatch = this.cartWatches[i];
 
-                if (currentCartWatch.id === decreasedCartWatchQuantity.id) {
-                    newCartWatches.push(decreasedCartWatchQuantity)
+                if (currentCartWatch.id === cartWatch.id) {
+                    newCartWatches.push(cartWatch)
                 } else {
                     newCartWatches.push(currentCartWatch)
                 }
 
             }
 
-            if (decreasedCartWatchQuantity.quantity === 1) {
-                decreasedCartWatchQuantity.isDecreaseQuantityDisabled = true;
+            if (cartWatch.quantity === 1) {
+                cartWatch.isDecreaseQuantityDisabled = true;
             }
 
-            let newCartPrice = (this.cartPrice - decreasedCartWatchQuantity.listing_price);
+            let newCartPrice = (this.cartPrice - cartWatch.listing_price);
             
             this.$store.commit('setCartPrice', newCartPrice);
             this.$store.commit('setCartWatch', newCartWatches);
@@ -139,6 +137,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import 'src/scss/variables';
+
 aside {
     width: 305px;
     position: absolute;
@@ -255,7 +255,7 @@ aside {
 }
 
 .checkout-button {
-    background-color: #304061;
+    background-color: $footer-text-color;
     color: #ffffff;
     outline: none;
     border: none;

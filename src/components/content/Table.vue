@@ -58,42 +58,38 @@
                 </select>
             </div>
         </section>
-        
-        <div class="selected-items">
-            <div class="selected-item" v-for="brandItem in brandItems">{{ brandItem.option }}
+
+        <section class="selected-items">
+            <div class="selected-item" v-for="brandItem in brandItems" :key="brandItem.value">
+                <span class="selected-item-name">{{ brandItem.option }}</span>
                 <span class="close-item" @click="closeBrandItem(brandItem)">X</span>
             </div>
-        </div>
 
-        <div class="selected-items">
-            <div class="selected-item" v-for="colorItem in colorItems">{{ colorItem.option }}
+            <div class="selected-item" v-for="colorItem in colorItems" :key="colorItem.value">
+                <span class="selected-item-name">{{ colorItem.option }}</span>
                 <span class="close-item" @click="closeColorItem(colorItem)">X</span>
             </div>
-        </div>
-
-        <div class="selected-items">
-            <div class="selected-item" v-for="materialItem in materialItems">{{ materialItem.option }}
+    
+            <div class="selected-item" v-for="materialItem in materialItems" :key="materialItem.value">
+                <span class="selected-item-name">{{ materialItem.option }}</span>
                 <span class="close-item" @click="closeMaterialItem(materialItem)">X</span>
             </div>
-        </div>
-
-        <div class="selected-items">
-            <div class="selected-item" v-for="featureItem in featureItems">{{ featureItem.option }}
+    
+            <div class="selected-item" v-for="featureItem in featureItems" :key="featureItem.value">
+                <span class="selected-item-name">{{ featureItem.option }}</span>
                 <span class="close-item" @click="closeFeatureItem(featureItem)">X</span>
             </div>
-        </div>
-
-        <div class="selected-items">
-            <div class="selected-item" v-for="priceItem in priceItems">{{ priceItem.option }}
+        
+            <div class="selected-item" v-for="priceItem in priceItems" :key="priceItem.value">
+                <span class="selected-item-name">{{ priceItem.option }}</span>
                 <span class="close-item" @click="closePriceItem(priceItem)">X</span>
             </div>
-        </div>
-
-        <div class="selected-items">
-            <div class="selected-item" v-for="genderItem in genderItems">{{ genderItem.option }}
+        
+            <div class="selected-item" v-for="genderItem in genderItems" :key="genderItem.value">
+                <span class="selected-item-name">{{ genderItem.option }}</span>
                 <span class="close-item" @click="closeGenderItem(genderItem)">X</span>
             </div>
-        </div>
+        </section>
 
         <div class="table-wrapper">
             <table>
@@ -110,91 +106,98 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody v-for="tableRow in tableRows" 
-                    :key="tableRow.id" 
-                    @click="tableRow.showMore = !tableRow.showMore" 
-                    :class="{ inactive: !tableRow.showMore }">
-                    <tr>
-                        <td>
-                            <i class="fa fa-star-o" aria-hidden="true" 
-                                @click="tableRow.isBrown = !tableRow.isBrown" 
-                                :class="{ inactive: tableRow.isBrown }">
-                            </i>
-                            <i class="fa fa-star" aria-hidden="true" 
-                                @click="tableRow.isBrown = !tableRow.isBrown" 
-                                :class="{ inactive: !tableRow.isBrown }">
-                            </i>
-                        </td>
-                        <td>
-                            <img :src="getImgUrl(tableRow.img_table_watch)" :alt="tableRow.img_table_watch">
-                        </td>
-                        <td class="third-col">
-                            <div class="brand-name">{{ tableRow.brand_name }}</div>
-                            <span class="brand-collection">{{ tableRow.brand_collection }}</span>
-                        </td>
-                        <td class="item-no">{{ tableRow.item_no }}</td>
-                        <td class="table-price">{{ tableRow.listing_price | toCurrency }}</td>
-                        <td class="table-price">{{ tableRow.wholesale_price | toCurrency }}</td>
-                        <td>
-                            <div class="qty">
-                                <span class="caret-quantity">{{ tableRow.quantity }}</span>
-                                <div class="carets">
-                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
-                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                <tbody>
+                    <template v-for="tableRow in tableRows" >
+                        <tr class="body-row"
+                        :key="tableRow.id" 
+                        @click="tableRow.showMore = !tableRow.showMore" 
+                        :class="{ inactive: !tableRow.showMore }">
+                            <td>
+                                <i class="fa fa-star-o" aria-hidden="true" 
+                                    @click="tableRow.isBrown = !tableRow.isBrown" 
+                                    :class="{ inactive: tableRow.isBrown }">
+                                </i>
+                                <i class="fa fa-star" aria-hidden="true" 
+                                    @click="tableRow.isBrown = !tableRow.isBrown" 
+                                    :class="{ inactive: !tableRow.isBrown }">
+                                </i>
+                            </td>
+                            <td>
+                                <img :src="getImgUrl(tableRow.img_table_watch)" :alt="tableRow.img_table_watch">
+                            </td>
+                            <td class="third-col">
+                                <div class="brand-name">{{ tableRow.brand_name }}</div>
+                                <span class="brand-collection">{{ tableRow.brand_collection }}</span>
+                            </td>
+                            <td class="item-no">{{ tableRow.item_no }}</td>
+                            <td class="table-price">{{ tableRow.listing_price | toCurrency }}</td>
+                            <td class="table-price">{{ tableRow.wholesale_price | toCurrency }}</td>
+                            <td>
+                                <div class="qty">
+                                    <span class="caret-quantity">{{ tableRow.quantity }}</span>
+                                    <div class="carets">
+                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="info-stock" v-if="tableRow.low_on_stock">
-                                <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                <span class="stock-title">Low on stock</span>
-                            </div>
-                            <button 
-                                class="add-button" 
-                                @click="switchButtonAndAddWatch(tableRow)" 
-                                v-if="!tableRow.out_of_stock"
-                                :class="{ disabled: tableRow.isAddButtonDisabled }">
-                            </button>
-                            <button class="out-stock-button" v-if="tableRow.out_of_stock">
-                                <img src="../../assets/images/empty-cart.png" alt="table-watch4">
-                                OUT OF STOCK
-                            </button>
-                        </td>
-                        <td>
-                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                        </td>
-                    </tr>
-                    <tr class="row-footer" :class="{ inactive: !tableRow.showMore }">
-                        <td>
-                            <span>more info</span>
-                        </td>
-                        <td>
-                            <span>more info</span>
-                        </td>
-                        <td>
-                            <span>more info</span>
-                        </td>
-                        <td>
-                            <span>more info</span>
-                        </td>
-                        <td>
-                            <span>more info</span>
-                        </td>
-                        <td>
-                            <span>more info</span>
-                        </td>
-                        <td>
-                            <span>more info</span>
-                        </td>
-                        <td>
-                            <span>more info</span>
-                        </td>
-                        <td>
-                            <a href="http://www.google.com" target="_blank">
-                                <i class="fa fa-external-link" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
+                            </td>
+                            <td>
+                                <div class="info-stock" v-if="tableRow.low_on_stock">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    <span class="stock-title">Low on stock</span>
+                                </div>
+                                <button 
+                                    class="add-button" 
+                                    @click="switchButtonAndAddWatch(tableRow)" 
+                                    v-if="!tableRow.out_of_stock"
+                                    :class="{ disabled: tableRow.isAddButtonDisabled }">
+                                    <span class="add-button-title" v-if="!tableRow.isAddButtonDisabled">ADD</span>
+                                    <span class="added-button-title" v-else>ADDED</span>
+                                    <i class="fa fa-shopping-cart" aria-hidden="true" v-if="!tableRow.isAddButtonDisabled"></i>
+                                    <i class="fa fa-check" aria-hidden="true" v-else></i>
+                                </button>
+                                <button class="out-stock-button" v-if="tableRow.out_of_stock">
+                                    <img src="../../assets/images/empty-cart.png" alt="table-watch4">
+                                    OUT OF STOCK
+                                </button>
+                            </td>
+                            <td class="chevron">
+                                <i class="fa fa-chevron-down" aria-hidden="true" v-if="!tableRow.isAddButtonDisabled"></i>
+                                <i class="fa fa-chevron-up" aria-hidden="true" v-else></i>
+                            </td>
+                        </tr>
+                        <tr class="row-footer" :class="{ inactive: !tableRow.showMore }">
+                            <td>
+                                <span>more info</span>
+                            </td>
+                            <td>
+                                <span>more info</span>
+                            </td>
+                            <td>
+                                <span>more info</span>
+                            </td>
+                            <td>
+                                <span>more info</span>
+                            </td>
+                            <td>
+                                <span>more info</span>
+                            </td>
+                            <td>
+                                <span>more info</span>
+                            </td>
+                            <td>
+                                <span>more info</span>
+                            </td>
+                            <td>
+                                <span>more info</span>
+                            </td>
+                            <td>
+                                <a href="http://www.google.com" target="_blank">
+                                    <i class="fa fa-external-link" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </template>
                 </tbody>
             </table>
         </div>
@@ -352,18 +355,13 @@ export default {
         },
         switchButtonAndAddWatch(tableRow) {
             tableRow.added = !tableRow.added;
-
-            let addedTableWatch = tableRow;
-            addedTableWatch.quantity = 1;
-            
-            if (addedTableWatch.quantity === 1) {
-                addedTableWatch.isAddButtonDisabled = true;
-            }
-            
-            this.cartWatches.push(addedTableWatch);
+            tableRow.quantity = 1;
+            tableRow.isAddButtonDisabled = true;
+        
+            this.cartWatches.push(tableRow);
             this.$store.commit('setCartWatch', this.cartWatches);
             
-            let newCartPrice = (this.cartPrice + addedTableWatch.listing_price);
+            let newCartPrice = (this.cartPrice + tableRow.listing_price);
             this.$store.commit('setCartPrice',  newCartPrice);
         }
     }
@@ -418,10 +416,6 @@ export default {
     color: #ddccb8;
 }
 
-::-ms-input-placeholder { 
-    color: #ddccb8;
-}
-
 .select-wrapper {
     display: flex;
     justify-content: space-between;
@@ -444,6 +438,8 @@ select {
     flex-wrap: wrap;
     margin-left: 10%;
     margin-right: 10%;
+    width: 80%;
+    justify-content: space-between;
 }
 
 .selected-item {
@@ -452,33 +448,35 @@ select {
     color: #b4947f;
     border-radius: 25px;
     border: 1px solid #ddccb8;
-    padding-left: 6px;
     font-size: 16px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-right: 10px;
     margin-top: 10px;
+}
+
+.selected-item-name {
+    margin-left: 14px;
 }
 
 .close-item {
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 14px;
 }
 
 .table-wrapper {
-    width: 100%;
     display: flex;
     justify-content: center;
 }
 
 table {
     border-collapse: collapse;
-    width: 80%;
+    width: 100%;
     margin: 2% 10% 0 10%; 
 }
 
-tbody {
+.body-row {
+    cursor: pointer;
     border: 1px solid #ddccb8;
     @include box-shadow(0px -10px 35px -7px #f5f2ee);
 
@@ -489,11 +487,6 @@ tbody {
         -o-box-shadow: none;
         box-shadow: none;
     }
-
-}
-
-tr {
-    cursor: pointer;
 }
 
 th, td {
@@ -526,15 +519,7 @@ th {
     text-align: left;
 }
 
-.fa-star-o {
-    color: #a9836b;
-    cursor: pointer;
-
-    &.inactive {
-        display: none;
-    }
-}
-
+.fa-star-o,
 .fa-star {
     color: #a9836b;
     cursor: pointer;
@@ -545,7 +530,7 @@ th {
 }
 
 .brand-name {
-    color: #304061;
+    color: $footer-text-color;
     font-weight: 600;
     font-size: 19px;
 }
@@ -590,8 +575,8 @@ th {
 
 .info-stock {
     display: flex;
-    justify-content: center;
     margin-bottom: 2px;
+    margin-left: 18px;
 }
 
 .stock-title {
@@ -608,10 +593,12 @@ th {
 
 .add-button {
     position: relative;
-    height: 50px;
-    width: 134px;
     display: flex;
     align-items: center;
+    justify-content: space-around;
+    height: 50px;
+    max-width: 130px;
+    width: 100%;
     outline: none;
     border: none;
     background-color: $base-blue;
@@ -621,58 +608,20 @@ th {
     font-size: 16px;
     letter-spacing: 4px;
     cursor: pointer;
-
-    &:before {
-        font-family: FontAwesome;
-        content: "ADD";
-        position: absolute;
-        left: 26px;
-    }
-
-    &:after {
-        font-family: FontAwesome;
-        content: "\f07a";
-        position: absolute;
-        right: 26px;
-    }
 }
 
 .add-button.disabled {
-    position: relative;
-    height: 50px;
-    width: 134px;
-    display: flex;
-    align-items: center;
-    outline: none;
-    border: none;
-    background-color: $base-blue;
-    color: #ffffff;
-    font-weight: 500;
-    margin-left: 5px;
-    font-size: 16px;
-    letter-spacing: 4px;
     opacity: 0.5;
     pointer-events: none;
-
-    &:before {
-        font-family: FontAwesome;
-        content: "ADDED";
-        position: absolute;
-        left: 12px;
-    }
-
-    &:after {
-        font-family: FontAwesome;
-        content: "\f00c";
-        position: absolute;
-        right: 12px;
-    }
 }
 
 .out-stock-button {
     background-color: #ffffff;
     outline: none;
     border: none;
+    height: 50px;
+    max-width: 130px;
+    width: 100%;
     color: $base-blue;
     font-size: 11px;
     font-weight: 600;
@@ -683,10 +632,13 @@ th {
     }
 }
 
-td {
-    .fa-chevron-down {
-        color: #926d56;
-        font-size: 12px;
+.chevron {
+    color: #c0a492;
+    font-size: 12px;
+
+    .fa-chevron-up {
+        padding-right: 20px;
+        padding-top: 10px;
     }
 }
 
@@ -698,6 +650,10 @@ td {
     select {
         width: 30%;
         margin-bottom: 6px;
+    }
+
+    .selected-item {
+        width: 30%;
     }
 
     th, td {
@@ -723,62 +679,33 @@ td {
         font-size: 18px;
     }
 
-    .brand-collection {
+    .brand-collection,
+    .fa-info-circle {
         font-size: 13px;
     }
 
-    .item-no {
+    .table-price,
+    .caret-quantity {
         font-size: 14px;
-    }
-
-    .table-price {
-        font-size: 14px;
-    }
-
-    .caret-number {
-        margin-right: 13px;
-        font-size: 14px;
-
-        &:before {
-            font-size: 11px;
-        }
-
-        &:after {
-            font-size: 11px;
-        }
     }
 
     .stock-title {
         font-size: 10px;
     }
 
-    .fa-info-circle {
-        font-size: 13px;
+    .add-button,
+    .add-button.disabled {
+        height: 36px;
+        font-size: 12px;
     }
 
-    .add-button {
-        height: 32px;
-        width: 88px;
-        font-size: 12px;
-
-        &:after {
-            right: 16px;
-        }
-    }
-
-    .added-button  {
-        height: 32px;
-        width: 88px;
-        font-size: 12px;
-
-        &:after {
-            right: 3px;
-            top: 10px;
-        }
+    .fa-shopping-cart {
+        font-size: 19px;
     }
 
     .out-stock-button {
         font-size: 9px;
+        height: 36px;
 
         img {
             width: 13px;
@@ -786,23 +713,32 @@ td {
         }
     }
 
-    td {
+    .chevron {
         .fa-chevron-down {
             font-size: 11px;
         }
     }
-
 }
 
 @media only screen and (max-width: 768px) {
     table {
         margin: 2% 8% 0 8%;
     }
+
+    th, td {
+        padding: 3px;
+    }
+
+    .chevron {
+        .fa-chevron-down {
+            display: block;
+        }
+    }
 }
 
 @media only screen and (max-width: 600px) {
     table {
-        margin: 2% 6% 0 6%;
+        margin: 2% 5% 0 5%;
     }
 
     th, td {
@@ -811,7 +747,6 @@ td {
 
     .fa-star-o {
         font-size: 14px;
-        margin-bottom: 8px;
     }
 
     td {
@@ -829,65 +764,42 @@ td {
         font-size: 15px;
     }
 
-    .brand-collection {
-        font-size: 11px;
-    }
-
     .item-no {
         font-size: 12px;
     }
 
-    .table-price {
-        font-size: 12px;
+    .brand-collection,
+    .fa-info-circle {
+        font-size: 11px;
     }
 
-    .caret-number {
-        margin-right: 11px;
+    .table-price,
+    .caret-quantity {
         font-size: 12px;
-
-        &:before {
-            font-size: 9px;
-        }
-
-        &:after {
-            font-size: 9px;
-        }
     }
 
     .stock-title {
         font-size: 8px;
     }
 
-    .fa-info-circle {
+    .add-button,
+    .add-button.disabled {
+        height: 32px;
         font-size: 11px;
     }
 
-    .add-button {
-        height: 26px;
-        width: 72px;
-        font-size: 10px;
-        margin-left: 10px;
+    .add-button-title,
+    .added-button-title {
+        letter-spacing: 2px;
+    } 
 
-        &:after {
-            font-size: 10px;
-            right: 12px;
-        }
-    }
-
-    .added-button  {
-        height: 26px;
-        width: 72px;
-        font-size: 10px;
-
-        &:after {
-            right: 0px;
-            top: 8px;
-            font-size: 8px;
-        }
+    .fa-shopping-cart {
+        font-size: 15px;
     }
 
     .out-stock-button {
         font-size: 8px;
+        height: 32px;
 
         img {
             width: 11px;
@@ -895,19 +807,16 @@ td {
         }
     }
 
-    td {
-        .fa-chevron-down {
+    .chevron {
+        .fa-chevron-down,
+        .fa-chevron-up {
             font-size: 9px;
+            margin-left: 5px;
         }
     }
-
 }
 
-@media only screen and (max-width: 480px) {
-    table {
-        margin: 2% 4% 0 4%;
-    }
-
+@media only screen and (max-width: 520px) {
     .input-field {
         font-size: 12px;
         height: 32px;
@@ -923,14 +832,25 @@ td {
         top: 10px;
     }
 
-    .fa-star-o {
+    .selected-item {
+        height: 36px;
+        font-size: 11px;
+    }
+
+    table {
+        margin: 5px;
+        width: 100%;
+    }
+
+    .fa-star-o,
+    .fa-star {
         font-size: 10px;
     }
 
     td {
         img {
-            width: 25px;
-            height: 47px;
+            width: 20px;
+            height: 31px;
         }
     }
 
@@ -938,11 +858,9 @@ td {
         font-size: 9px;
     }
 
-    .brand-name {
-        font-size: 9px;
-    }
-
-    .brand-collection {
+    .brand-name,
+    .brand-collection,
+    .fa-info-circle {
         font-size: 9px;
     }
 
@@ -950,69 +868,55 @@ td {
         font-size: 8px;
     }
 
-    .table-price {
+    .table-price,
+    .caret-quantity {
         font-size: 8px;
-    }
-
-    .caret-number {
-        margin-right: 8px;
-        font-size: 8px;
-
-        &:before {
-            font-size: 5px;
-        }
-
-        &:after {
-            font-size: 5px;
-        }
     }
 
     .stock-title {
-        font-size: 6px;
-    }
-
-    .fa-info-circle {
         font-size: 8px;
     }
 
-    .add-button {
-        height: 16px;
-        width: 44px;
-        font-size: 8px;
-        letter-spacing: 0;
-
-        &:after {
-            font-size: 6px;
-            top: 4px;
-            right: 10px;
-        }
+    .add-button,
+    .add-button.disabled {
+        height: 26px;
+        max-width: 50px;
+        font-size: 10px;
     }
 
-    .added-button  {
-        height: 16px;
-        width: 44px;
+    .add-button-title,
+    .added-button-title {
+        letter-spacing: 1px;
         font-size: 8px;
-        letter-spacing: 0;
+    } 
 
-        &:after {
-            right: 1px;
-            top: 4px;
-            font-size: 6px;
-        }
+    .fa-shopping-cart,
+    .fa-check {
+        font-size: 9px;
     }
 
     .out-stock-button {
+        font-size: 8px;
+        height: 40px;
+        max-width: 50px;
+
         img {
-            width: 9px;
-            height: 9px;
+            width: 10px;
+            height: 10px;
         }
     }
 
-    td {
-        .fa-chevron-down {
-            font-size: 6px;
-        }
+    .info-stock {
+        margin-left: 7px;
     }
 
+    .chevron {
+        .fa-chevron-down,
+        .fa-chevron-up {
+            font-size: 8px;
+            margin-left: 5px;
+            padding-right: 13px;
+        }
+    }
 }
 </style>
