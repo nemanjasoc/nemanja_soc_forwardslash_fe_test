@@ -136,8 +136,8 @@ footer {
     &:after {
         content: 'th';
         position: absolute;
-        top: -2px;
-        right: -10px;
+        top: -9px;
+        right: -8px;
         font-size: 10px;
     }
 }

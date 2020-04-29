@@ -107,7 +107,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <template v-for="tableRow in tableRows" >
+                    <template v-for="tableRow in tableRows">
                         <tr class="body-row"
                         :key="tableRow.id" 
                         @click="tableRow.showMore = !tableRow.showMore" 
