@@ -230,10 +230,6 @@ export default {
     }
 }
 
-.slide-watch {
-    display: flex;
-}
-
 @media only screen and (max-width: 1400px) {
     .slide-container {
         padding-top: 15%;
@@ -346,11 +342,6 @@ export default {
     .watch-thumbnail {
         width: 80px;
         height: 80px;
-    }
-
-    .thumbnail-watch-img1 {
-        width: 32px;
-        height: 52px;
     }
 
     .VueCarousel-pagination[data-v-438fd353] {

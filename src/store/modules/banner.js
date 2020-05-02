@@ -35,15 +35,15 @@ const state = {
     ],
     thumbnailImages: [
         {
-            id: '1',
+            id: 1,
             img_thumbnail_watch: 'table-watch1.png'
         },
         {
-            id: '2',
+            id: 2,
             img_thumbnail_watch: 'thumbnail-watch.png'
         },
         {
-            id: '3',
+            id: 3,
             img_thumbnail_watch: 'table-watch3.png'
         }
     ]

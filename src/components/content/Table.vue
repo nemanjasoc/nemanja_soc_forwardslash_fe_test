@@ -608,11 +608,11 @@ th {
     font-size: 16px;
     letter-spacing: 4px;
     cursor: pointer;
-}
 
-.add-button.disabled {
-    opacity: 0.5;
-    pointer-events: none;
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
 }
 
 .out-stock-button {
@@ -693,10 +693,14 @@ th {
         font-size: 10px;
     }
 
-    .add-button,
-    .add-button.disabled {
+    .add-button {
         height: 36px;
         font-size: 12px;
+
+        &.disabled {
+            height: 36px;
+            font-size: 12px;
+        }
     }
 
     .fa-shopping-cart {
@@ -782,10 +786,14 @@ th {
         font-size: 8px;
     }
 
-    .add-button,
-    .add-button.disabled {
+    .add-button {
         height: 32px;
         font-size: 11px;
+
+        &.disabled {
+            height: 32px;
+            font-size: 11px;
+        }
     }
 
     .add-button-title,
@@ -877,11 +885,16 @@ th {
         font-size: 8px;
     }
 
-    .add-button,
-    .add-button.disabled {
+    .add-button {
         height: 26px;
         max-width: 50px;
         font-size: 10px;
+
+        &.disabled {
+            height: 26px;
+            max-width: 50px;
+            font-size: 10px;
+        }
     }
 
     .add-button-title,

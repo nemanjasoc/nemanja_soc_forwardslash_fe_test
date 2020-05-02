@@ -43,7 +43,9 @@
                         
                         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                         <span class="company-name">Company Name</span>
-                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        <div class="company-name-chevron">
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </div>
                     </div>
                 </div>
 
@@ -88,7 +90,9 @@
                 <li>
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                     <span class="company-name">Company Name</span>
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    <div class="company-name-chevron">
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -495,6 +499,12 @@ header {
             position: absolute;
             right: -18px;
             bottom: 7px;
+        }
+
+        .company-name-chevron {
+            .fa-chevron-down {
+                color: $base-blue;
+            }
         }
 
         .cart-badge {
